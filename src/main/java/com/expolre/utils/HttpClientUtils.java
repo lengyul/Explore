@@ -130,8 +130,9 @@ public class HttpClientUtils {
 			StringEntity postingString = new StringEntity(json, Charset.forName(ENCODING));// json传递
 			post.setEntity(postingString);
 			response = httpClient.execute(post);
-			String content = EntityUtils.toString(response.getEntity());
-			result = content;
+			if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {				
+				result = EntityUtils.toString(response.getEntity());
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -205,12 +206,8 @@ public class HttpClientUtils {
 				}
 			}
 			response = httpClient.execute(httpGet);
-			int statusCode = response.getStatusLine().getStatusCode();
-			System.out.println("执行状态码 : " + statusCode);
-			HttpEntity entity = response.getEntity();
-			if (entity != null) {
-				InputStream instream = entity.getContent();
-				result = IOUtils.toString(instream, ENCODING);
+			if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
+				result = EntityUtils.toString(response.getEntity(), ENCODING);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

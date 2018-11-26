@@ -38,7 +38,7 @@ public class JSONObjectUtils {
 	 * @param json
 	 * @return
 	 */
-	public static JSONObject getAscObjct(JSONObject json) {
+	public static JSONObject getAsciiObjct(JSONObject json) {
 		Map<String, Object> jsonMap = json;
 		List<String> keys = new ArrayList<String>(jsonMap.keySet());
 		Collections.sort(keys);
