@@ -2,7 +2,7 @@ package com.expolre.test;
 
 import org.junit.Test;
 
-import com.expolre.util.DateTimeUtils;
+import com.expolre.utils.DateTimeUtils;
 
 public class DateTimeTest {
 		

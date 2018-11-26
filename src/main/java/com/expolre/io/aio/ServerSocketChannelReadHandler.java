@@ -6,7 +6,7 @@ import java.nio.channels.AsynchronousSocketChannel;
 import java.nio.channels.CompletionHandler;
 import java.nio.charset.Charset;
 
-import com.expolre.util.ByteBufferUtils;
+import com.expolre.utils.ByteBufferUtils;
 
 /**
  * 读取客户端数据处理
@@ -23,7 +23,7 @@ public class ServerSocketChannelReadHandler implements CompletionHandler<Integer
 	
 	@Override
 	public void completed(Integer result, ByteBuffer attachment) {
-		System.out.println(result+","+attachment);
+		// System.out.println(result+","+attachment);
 		if (result == -1) { //客户端停止套接字传输
 			try {
 				this.asChannel.close();
@@ -32,7 +32,12 @@ public class ServerSocketChannelReadHandler implements CompletionHandler<Integer
 				e.printStackTrace();
 			}
 		}
-		
+		/*try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
 		//读取字节数据
 		attachment.flip();
         System.out.println("接收到客户端响应数据： " + Charset.forName("UTF-8").decode(attachment));

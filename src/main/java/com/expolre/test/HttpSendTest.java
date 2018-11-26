@@ -2,7 +2,7 @@ package com.expolre.test;
 
 import org.junit.Test;
 
-import com.expolre.util.HttpClientUtils;
+import com.expolre.utils.HttpClientUtils;
 
 public class HttpSendTest {
 		

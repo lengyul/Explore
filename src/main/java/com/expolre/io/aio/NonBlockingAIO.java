@@ -6,6 +6,7 @@ import java.nio.ByteBuffer;
 import java.nio.channels.AsynchronousChannelGroup;
 import java.nio.channels.AsynchronousServerSocketChannel;
 import java.nio.channels.AsynchronousSocketChannel;
+import java.time.Instant;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
@@ -76,7 +77,9 @@ public class NonBlockingAIO {
             	 */
             	ByteBuffer readBuffer = ByteBuffer.allocate(20);
             	asChannel.read(readBuffer,readBuffer,new ServerSocketChannelReadHandler(asChannel));
-			}
+            	//read方法不会阻塞下面的代码
+            	System.out.println(this.getClass()+"："+Instant.now()); 
+            }
         }	
 	}
 	
