@@ -25,9 +25,11 @@ public class NonBlockingNIO {
 		SocketChannel socketChannel =SocketChannel.open(new InetSocketAddress("127.0.0.1",8888));
 		socketChannel.configureBlocking(false);//切换为非阻塞模式
 		
+		String res = "client--->data:你好！";
+		byte [] bytes = res.getBytes();
 		//写入数据到服务端
-		ByteBuffer buffer =ByteBuffer.allocate(1024);
-		buffer.put("client--->data:你好！".getBytes());
+		ByteBuffer buffer =ByteBuffer.allocate(bytes.length);
+		buffer.put(bytes);
 		buffer.flip(); //数据传出状态
 		socketChannel.write(buffer);
 		buffer.clear();//清除缓冲区
@@ -35,8 +37,10 @@ public class NonBlockingNIO {
 		int len = 0;
 		while (true) {
 			    len =  socketChannel.read(buffer);
-				if (len >  0 ) {					
+				if (len >  0 ) {	
 					buffer.flip();
+					/*byte [] bytes = new byte[len];
+					buffer.get(bytes);*/
 					System.out.println("接收到服务端数据："+new String(buffer.array(),0,len));
 					buffer.clear();
 				}
@@ -66,15 +70,15 @@ public class NonBlockingNIO {
 					SocketChannel socketChannel = serverSocketChannel.accept();
 					socketChannel.configureBlocking(false); //切换非阻塞模式
 					socketChannel.register(selector,SelectionKey.OP_READ);//注册选择器为读模式
-				}else if(sk.isReadable()){ //通道中是否有可读数据
+				}else if(sk.isReadable()){ //(读就绪)有可读数据
 					 SocketChannel socketChannel = (SocketChannel) sk.channel();
 					 ByteBuffer buffer = ByteBuffer.allocate(1024);
 					 int len = socketChannel.read(buffer);
 					 if (len > 0 ) {						
-						 System.out.println("接收到客户端数据："+new String(buffer.array()));
+						 System.out.println("接收到客户端数据："+new String(buffer.array(),0,len));
 						 socketChannel.register(selector,SelectionKey.OP_WRITE);//注册选择器为写模式
 					 }
-				}else if(sk.isWritable()){ //通道中是否有可写数据
+				}else if(sk.isWritable()){ //(写就绪)可写数据，一般不需要去注册该(可写)事件，在读取数据后写入即可
 					SocketChannel socketChannel = (SocketChannel) sk.channel();
 					socketChannel.write(ByteBuffer.wrap("successful...".getBytes())); 
 					socketChannel.register(selector,SelectionKey.OP_READ);//注册选择器为读模式
@@ -107,12 +111,12 @@ public class NonBlockingNIO {
 					SocketChannel socketChannel = serverSocketChannel.accept();
 					socketChannel.configureBlocking(false); //切换非阻塞模式
 					socketChannel.register(selector,SelectionKey.OP_READ);//注册选择器为读模式
-				}else if(sk.isReadable()){ //通道中是否有可读数据
+				}else if(sk.isReadable()){ //(读就绪)有可读数据
 					new Thread(() -> {						
 						//获取当前选择器上读就绪状态的通道						
 						//读取客户端数据，这里省略
 					}).start();	
-				}else if(sk.isWritable()){ //通道中是否有可写数据
+				}else if(sk.isWritable()){ //(写就绪)可写数据，一般不需要去注册该(可写)事件，在读取数据后写入即可
 					new Thread(() -> {						
 						//获取当前选择器上写就绪状态的通道
 						//写入数据到客户端，这里省略

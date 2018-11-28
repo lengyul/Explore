@@ -39,19 +39,17 @@ public class BlockingBIO {
 		ServerSocket serverSocket = new ServerSocket(8888); // 监听端口8888
 		try {
 			while (true) {
-				Socket socket = serverSocket.accept(); // 阻塞式接收socket连接
-				new Thread(() -> { // 创建一个新的线程
+				Socket socket = serverSocket.accept(); //阻塞式接收socket连接
+				new Thread(() -> {  //创建一个新的线程
 					byte[] b = new byte[1024];
 					try {
 						InputStream in = socket.getInputStream();
-						in.read(b); // 读取客户端发送的数据
-						System.out.println("接收到客户端数据：" + new String(b));
+						int len = in.read(b); // 读取客户端发送的数据
+						System.out.println("接收到客户端数据：" + new String(b,0,len));
 						OutputStream out = socket.getOutputStream();
 						out.write("successful...".getBytes()); // 返回数据到客户端
-						// 关闭连接
-						in.close();
-						out.close();
-						socket.close();
+						//关闭连接
+						in.close(); out.close(); socket.close();
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
