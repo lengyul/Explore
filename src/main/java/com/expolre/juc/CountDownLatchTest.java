@@ -42,9 +42,9 @@ class LatchDemp implements Runnable{
 	public void run() {
 		synchronized (this) {
 		try {			
-			for (int i = 0; i < 50000; i++) {
-				System.out.println(i);
-			}
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}finally{			
 			latch.countDown();// - 1
 			}
