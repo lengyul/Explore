@@ -12,7 +12,7 @@ import java.nio.charset.CharsetDecoder;
  *
  */
 public class ByteBufferUtils {
-
+	
 	/**
 	 * 将Bytebuffer中的字节转换为字符串
 	 * 

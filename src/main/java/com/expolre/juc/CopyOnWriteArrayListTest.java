@@ -26,8 +26,8 @@ public class CopyOnWriteArrayListTest {
 
 class ListModifyDemo implements Runnable{
 
-	 //private static List<String> list = new ArrayList<>();
-     private static CopyOnWriteArrayList<String> list = new CopyOnWriteArrayList<>();
+	 private static List<String> list = new ArrayList<>();
+     //private static CopyOnWriteArrayList<String> list = new CopyOnWriteArrayList<>();
 	
 	static{
 		list.add("A");

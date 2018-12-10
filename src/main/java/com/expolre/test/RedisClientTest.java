@@ -15,9 +15,14 @@ public class RedisClientTest {
 	public static void main(String[] args) {
 		RedisService rs = new RedisServiceImpl();
 		
-		rs.setKey("hello","world1");
+		//rs.setKey("hello","world1");
 		
-		System.out.println(rs.getKey("hello"));
+		//System.out.println(rs.getKey("hello"));
+		//System.out.println(rs.getKey("hello"));
+		
+		for (int i = 0; i < 100; i++) {			
+			System.out.println(rs.getKey("hello"));
+		}
 	}
 	
 	@Test

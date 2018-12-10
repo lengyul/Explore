@@ -14,12 +14,14 @@ import java.util.concurrent.FutureTask;
 public class CallableTest {
 		
 	public static void main(String[] args) throws InterruptedException, ExecutionException {
-		CallableDemo cd =new CallableDemo();
-		
+		CallableDemo cd =new CallableDemo();		
 		FutureTask<String> ft = new FutureTask<>(cd);
-		new Thread(ft).start();
+		CompletedResult cr = new CompletedResult(ft);
 		
-		System.out.println(ft.get());
+		new Thread(ft).start();
+		new Thread(cr).start();;
+		
+		
 	} 
 	
 }
@@ -28,8 +30,30 @@ class CallableDemo implements Callable<String>{
 
 	@Override
 	public String call() throws Exception {
-		
+		Thread.sleep(2000);
 		return "success";
+	}
+}
+
+class CompletedResult implements Runnable{
+
+	public FutureTask<String> futureTask;
+	
+	public CompletedResult(FutureTask<String> futureTask){
+		this.futureTask = futureTask;
+	}
+	
+	@Override
+	public void run() {
+		try {
+			System.out.println("-----------------------start");
+			String result = futureTask.get();
+			if ("success".equals(result)) {
+				System.out.println(this.getClass());
+			}
+		} catch (InterruptedException | ExecutionException e) {
+			e.printStackTrace();
+		}
 	}
 	
 }
