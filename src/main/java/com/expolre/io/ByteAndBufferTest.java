@@ -2,14 +2,19 @@ package com.expolre.io;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 
+import org.junit.Test;
 
-public class ReadFile {
+
+public class ByteAndBufferTest {
 	
-	public static void main(String[] args) throws IOException {
+	@Test
+	public void byetTest() throws IOException{
 		
 		//FileReader fr  = new FileReader(new File("C:\\Users\\Administrator\\Desktop\\工具.txt"));
 		
@@ -36,6 +41,30 @@ public class ReadFile {
 		reader.read(c);
 		reader.close();
 		System.out.println(new String(c));*/
+	}
+	
+	
+	@Test
+	public void bufferTest(){		
+		ByteBuffer buffer = ByteBuffer.allocate(1024);
+		//capacity = 1024;limit = 1024;postion = 0;
+		
+		buffer.put("abc".getBytes());
+		//capacity = 1024;limit = 1024;postion = 3;
+		
+		buffer.flip();
+		//capacity = 1024;limit = 3;postion = 0;
+		
+		byte[] bytes = new byte[buffer.remaining()]; // limit - postion = 3 - 0 = 3
+		buffer.get(bytes);
+		//capacity = 1024;limit = 3;postion = 3;
+		
+		buffer.clear();
+		//capacity = 1024;limit = 1024;postion = 0;
+		
+		System.out.println(buffer.capacity());
+		System.out.println(buffer.limit());
+		System.out.println(buffer.position());
 	}
 
 }
