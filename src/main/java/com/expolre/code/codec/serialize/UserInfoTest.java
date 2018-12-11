@@ -21,7 +21,7 @@ import com.expolre.code.codec.UserInfo;
 public class UserInfoTest {
 	
 	public static void main(String[] args) throws IOException {
-		UserInfo userInfo = new UserInfo("Allen",001); //5 + 5 + 3
+		UserInfo userInfo = new UserInfo("Allen",10001); //5 + 4 + 4
 		
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
 		ObjectOutputStream os = new ObjectOutputStream(bos);
