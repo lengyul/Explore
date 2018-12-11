@@ -32,6 +32,11 @@ import org.junit.Test;
  */
 public class FunctionsTest {
 	
+	public static void main(String[] args) {
+		String name = "Alex";
+		new Thread(() -> System.out.println("Hello, " + name)).start();
+		//name = "1";
+	}
 
 	//Function<T, R>
 	public Integer function(Integer number,Function<Integer,Integer> f){	
@@ -85,7 +90,8 @@ public class FunctionsTest {
 		int result = supplierFunction(() -> (int)(Math.random() * 10));
 		System.out.println(result);
 		List<Integer> lists = supplierFunction(5, () -> (int)(Math.random() * 10));
-		lists.stream().forEach(x -> System.out.print(x+" "));
+		lists.stream().forEach(System.out::println);
+				
 	}
 	//------------------------------------------------------------------
 	
@@ -110,7 +116,7 @@ public class FunctionsTest {
 		System.out.println(result);
 		//2
 		List<Integer> numbers = Arrays.asList(1,2,3,4,5);
-		predicateFunction(numbers, (x) -> (x % 2 == 0)).stream().forEach(x -> System.out.print(x+" "));
+		predicateFunction(numbers, (x) -> (x % 2 == 0)).stream().forEach(System.out::println);
 	}
 	//------------------------------------------------------------------
 	
