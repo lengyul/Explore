@@ -65,6 +65,13 @@
 		<artifactId>fastjson</artifactId>
 		<version>1.2.46</version>
 	</dependency>
+	
+	<!-- https://mvnrepository.com/artifact/org.msgpack/msgpack-core -->
+	<dependency>
+    	<groupId>org.msgpack</groupId>
+    	<artifactId>msgpack-core</artifactId>
+    	<version>0.8.16</version>
+	</dependency>
 			
 			
   </dependencies>
