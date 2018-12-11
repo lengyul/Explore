@@ -1,4 +1,4 @@
-package com.expolre.code.codec;
+package com.expolre.code.codec.protobuf;
 
 /**
  * Protobuf全称Google Protocol Buffer
@@ -11,6 +11,6 @@ package com.expolre.code.codec;
  * 	跨语言，平台无关，扩展性好
  *  官方支持Java，C++，和Python三种语言
  */
-public class Protobuf {
+public class ProtobufTest {
 
 }

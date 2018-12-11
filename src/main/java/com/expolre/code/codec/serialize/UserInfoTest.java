@@ -1,8 +1,10 @@
-package com.expolre.code.codec;
+package com.expolre.code.codec.serialize;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+
+import com.expolre.code.codec.UserInfo;
 
 /**
  * POJO对象序列化测试
@@ -16,7 +18,7 @@ import java.io.ObjectOutputStream;
  * 2.编码后的字节太大,在网络传输中时更占用宽带
  * 3.编解码性能以及类库和api使用方便
  */
-public class TestUserInfo {
+public class UserInfoTest {
 	
 	public static void main(String[] args) throws IOException {
 		UserInfo userInfo = new UserInfo("Allen",001); //5 + 5 + 3
