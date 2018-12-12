@@ -9,7 +9,7 @@ import java.util.concurrent.FutureTask;
  * 1.允许带返回值，并且可以抛出异常
  * 2.执行Callable，需要FutureTask类的支持用于接收结果
  * @author lengyul
- *
+ * Callable用于产生结果，Future用于获取结果
  */
 public class CallableTest {
 		

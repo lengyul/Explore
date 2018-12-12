@@ -1,16 +1,25 @@
 package com.expolre.pattern.reactor;
 
+import java.util.Random;
+
+import com.expolre.utils.RandomUtils;
+
 public class Server {
 	
 	
 	public static void main(String[] args) {
 		Selector selector = new Selector();
-		Acceptor acceptor = new Acceptor(8888, selector);
+		Accpetor acceptor = new Accpetor(8888, selector);
 
 		
-		//acceptor.addNewConnection(new InputSource("ceshi")); //模拟外部请求
 		new Thread(acceptor).start();
 
+		for (int i = 0; i < 10; i++) {
+			new Thread(() -> {			
+				acceptor.addNewConnection(new InputSource("test")); //模拟外部请求
+			}).start();
+		}
+		//acceptor.addNewConnection(new InputSource("ceshi")); //模拟外部请求
 		//初始化事件对应处理器
 		Dispatcher dispatcher = new Dispatcher(selector);
 		dispatcher.registerEventHandler(EventType.ACCPET,new AccpetEventHandler());

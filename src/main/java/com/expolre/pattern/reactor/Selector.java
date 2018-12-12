@@ -16,8 +16,13 @@ public class Selector {
 	private BlockingQueue<Event> eventQueue = new LinkedBlockingQueue<>();
 	private Object lock = new Object();
 	
-	
-	List<Event> select(){
+	/**
+	 * 返回队列中的可用事件到dispatch中
+	 * 如果队列中元素为空（使用双检锁），那么进入等待状态；
+	 * 直到其他线程触发了addEvent方法，添加元素到队列成功时，将会被唤醒。
+	 * @return
+	 */
+	public List<Event> select(){
 		if (eventQueue.isEmpty()) {
 			synchronized (lock) {
 				if (eventQueue.isEmpty()) {
@@ -35,6 +40,10 @@ public class Selector {
 		return events;
 	}
 	
+	/**
+	 * 添加事件到队列中，并唤醒正在等待的lock对象
+	 * @param e
+	 */
 	public void addEvent(Event e){
 		boolean result = eventQueue.offer(e);
 		if (result) {

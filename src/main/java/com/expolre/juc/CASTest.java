@@ -4,7 +4,7 @@ public class CASTest {
 	
 	public static void main(String[] args) {
 		
-		CompareAndSwap cas =new CompareAndSwap();
+		CompareAndSwap cas = new CompareAndSwap();
 		for (int i = 0; i < 10; i++) {
 			new Thread(new Runnable() {
 				@Override

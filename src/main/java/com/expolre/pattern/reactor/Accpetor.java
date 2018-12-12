@@ -3,12 +3,12 @@ package com.expolre.pattern.reactor;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
-public class Acceptor implements Runnable{
+public class Accpetor implements Runnable{
 
 	private int port;
 	private Selector selector;
 	
-	public Acceptor(int port,Selector selector){
+	public Accpetor(int port,Selector selector){
 		this.port = port;
 		this.selector = selector;
 	}
@@ -26,7 +26,7 @@ public class Acceptor implements Runnable{
 			
 			InputSource source = null;
 			try {
-				source = sourceQueue.take();
+				source = sourceQueue.take(); //如果当前队列中元素为0，则等待
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
