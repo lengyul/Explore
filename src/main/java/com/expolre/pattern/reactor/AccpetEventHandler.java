@@ -13,11 +13,13 @@ public class AccpetEventHandler extends EventHandler {
 	public void handle(Event event) {
 		//处理Accpet事件
 		if (event.getEventType() == EventType.ACCPET) {
-			System.out.println("--------------------ACCPET");
-			//设置READ事件
+			//System.out.println("--------------------ACCPET");
+			//设置Read事件
 			Event readEvent = new Event();
 			readEvent.setEventType(EventType.READ);
 			readEvent.setInputSource(event.getInputSource());
+			System.out.println(Thread.currentThread().getName()+":"+event.getInputSource().toString());
+			// WorksThreadPool.execute(readEvent);
 		}
 		
 	}

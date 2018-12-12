@@ -1,4 +1,6 @@
-package com.expolre.pattern.command;
+package com.expolre.pattern.command.simple;
+
+import com.expolre.pattern.command.Command;
 
 public class Control {
 	

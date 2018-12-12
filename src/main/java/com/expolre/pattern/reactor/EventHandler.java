@@ -7,17 +7,17 @@ package com.expolre.pattern.reactor;
  */
 public abstract class EventHandler {
 	
-	private InputSource inputSource;
+	//private InputSource inputSource;
 	
 	public abstract void handle(Event event); //各个事件具体类去实现
 
-	public InputSource getInputSource() {
+	/*public InputSource getInputSource() {
 		return inputSource;
 	}
 
 	public void setInputSource(InputSource inputSource) {
 		this.inputSource = inputSource;
-	}
+	}*/
 	
 	
 }

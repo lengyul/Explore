@@ -1,4 +1,6 @@
-package com.expolre.pattern.command;
+package com.expolre.pattern.command.simple;
+
+import com.expolre.pattern.command.Command;
 
 public class DoorOpenCommand implements Command {
 
@@ -11,6 +13,11 @@ public class DoorOpenCommand implements Command {
 	@Override
 	public void execute() {
 		door.open();
+	}
+
+	@Override
+	public void undo() {
+		door.close();
 	}
 
 }

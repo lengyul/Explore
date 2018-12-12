@@ -1,4 +1,6 @@
-package com.expolre.pattern.command;
+package com.expolre.pattern.command.simple;
+
+import com.expolre.pattern.command.Command;
 
 public class LightOnCommand implements Command {
 	
@@ -11,6 +13,11 @@ public class LightOnCommand implements Command {
 	@Override
 	public void execute() {
 		light.on();
+	}
+
+	@Override
+	public void undo() {
+		light.off();
 	}
 
 
