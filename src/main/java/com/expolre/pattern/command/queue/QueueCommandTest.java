@@ -13,12 +13,19 @@ public class QueueCommandTest {
 		AccpetCommand accpetCommand = new AccpetCommand();
 		ReadCommand readCommand = new ReadCommand();
 		WriteCommand writeCommand = new WriteCommand();
-		queueCommand.add(accpetCommand);
-		queueCommand.add(readCommand);
-		queueCommand.add(writeCommand);
-		queueCommand.add(accpetCommand);
-		queueCommand.add(readCommand);
-		queueCommand.add(writeCommand);
+		
+		for (int i = 0; i < 5; i++) {			
+			new Thread(() ->{
+				try {
+					queueCommand.add(accpetCommand);
+					queueCommand.add(readCommand);
+					queueCommand.add(writeCommand);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}).start();
+		}
 		
 	}
 }

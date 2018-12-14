@@ -14,7 +14,7 @@ public class QueueCommand {
 	
 	BlockingQueue<Command> commandQueue = new LinkedBlockingDeque<>();
 	Lock lock = new ReentrantLock();
-	Condition condition = lock.newCondition();
+	Condition condition = lock.newCondition(); //可以使用多条件变量condition控制
 	
 	public QueueCommand() {
 	}
@@ -42,7 +42,7 @@ public class QueueCommand {
 	}
 	
 	public void add(Command command) throws InterruptedException{
-		try {
+		/*try {
 			lock.lock();
 			commandQueue.put(command);//put方法在队列size = capacity会阻塞，直到队列size < capacity
 			condition.signalAll(); //如果put阻塞后，await会一直等待，导致无限阻塞
@@ -50,9 +50,9 @@ public class QueueCommand {
 			e.printStackTrace();
 		} finally{
 			lock.unlock();
-		}
+		}*/
 		
-		/*boolean result = commandQueue.offer(command);
+		boolean result = commandQueue.offer(command);
 		if (result) {
 			try {
 				lock.lock();
@@ -63,8 +63,10 @@ public class QueueCommand {
 				lock.unlock();
 			}
 		} else {
-			// add(command); //队列capacity数量限制测试，可能出现StackOverflowError异常
-		}*/
+			commandQueue.put(command); //再次放入队列中，此时size == capacity会阻塞，等待的线程会获取到锁进行消费队列元素，完成后此方法被唤醒
+			//commandQueue.offer(command); //再次失败可能导致当前command丢失
+			//add(command); //队列capacity数量限制测试，可能出现StackOverflowError异常
+		}
 	}
 	
 }

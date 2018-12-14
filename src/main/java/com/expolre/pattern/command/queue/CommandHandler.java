@@ -19,7 +19,7 @@ public class CommandHandler {
 	
 	public void handler(){
 		while (true) {
-			List<Command> commands = queueCommand.getCommands();
+			List<Command> commands = queueCommand.getCommands(); //获取请求的command，阻塞直到返回command
 			System.out.println(commands.size());
 			for (Command command : commands) {				
 				callCommand.setCommand(command);			
