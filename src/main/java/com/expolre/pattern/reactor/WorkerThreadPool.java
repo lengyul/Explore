@@ -3,12 +3,12 @@ package com.expolre.pattern.reactor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class WorksThreadPool {
+public class WorkerThreadPool {
 	
-	private static ExecutorService worksThreadPool = Executors.newCachedThreadPool();
+	private static ExecutorService executorService = Executors.newCachedThreadPool();
 	
 	public static void execute(Event event){
-		worksThreadPool.execute(new Thread(() ->{
+		executorService.execute(new Thread(() ->{
 			System.out.println(Thread.currentThread().getName()+":"+event.getInputSource().toString());
 		}));
 	}
