@@ -33,7 +33,7 @@ public class VolatileTest {
 
 class ThreadDemo implements Runnable{
 	
-	private boolean flag = false;
+	private volatile boolean flag = false;
 	public boolean isFlag() {
 		return flag;
 	}
