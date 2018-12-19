@@ -18,7 +18,7 @@ public class ByteAndBufferTest {
 		
 		//FileReader fr  = new FileReader(new File("C:\\Users\\Administrator\\Desktop\\工具.txt"));
 		
-		InputStream in = new FileInputStream(new File("C:\\Users\\Administrator\\Desktop\\CmdHandlerInitializer.java"));
+		InputStream in = new FileInputStream(new File("C:\\Users\\Administrator\\Desktop\\terminal.log"));
 		
 		byte [] bytes = new byte[in.available()];
 		int len = in.read(bytes); // read(byte[] b): -1表示没有字节可用，0表示b的长度为0
