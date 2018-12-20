@@ -1,4 +1,4 @@
-package com.expolre.code.functions;
+package com.expolre.code.java8.functions;
 
 import java.util.ArrayList;
 import java.util.Arrays;

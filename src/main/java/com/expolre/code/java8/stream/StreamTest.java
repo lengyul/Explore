@@ -1,4 +1,4 @@
-package com.expolre.code.stream;
+package com.expolre.code.java8.stream;
 
 import java.util.Arrays;
 
