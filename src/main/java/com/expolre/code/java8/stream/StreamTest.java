@@ -1,6 +1,15 @@
 package com.expolre.code.java8.stream;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
+import java.util.Random;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 /**
  * Java8 Stream API操作
@@ -18,7 +27,7 @@ import java.util.Arrays;
  * dropWhile：从原始流起始位置开始删除满足指定 Predicate 的元素，直到遇到第一个不满足 Predicate 的元素。
  * takeWhile：从原始流起始位置开始保留满足指定 Predicate 的元素，直到遇到第一个不满足 Predicate 的元素。
  * ---------------------------------------------------------------------------------------------
- * 常见终结操作：
+ * 常见终止操作：
  * forEach：对流中的每个元素执行由Consumer给定的实现。
  * reduce：把一个流约简成单个结果。
  * Max 和 min是两种特殊的约简操作，分别求得流中元素的最大值和最小值。
@@ -29,8 +38,50 @@ import java.util.Arrays;
 public class StreamTest {
 	
 	public static void main(String[] args) {
-		
+		//----------------Stream的创建方式-------------
+		//Stream
+		Stream.of(1,2,3,4,5);
+		Stream.generate(() -> 1);
+		//Collection
+		List<String> list = new ArrayList<>();
+		list.stream();
+		list.parallelStream();
+		//Array
 		Arrays.stream(new int[]{1,2,3,4,5});
+		//Number
+		IntStream.of(1,2,3,4,5);
+		//Random
+		IntStream is = new Random().ints().limit(10);
+		
+		//----------------Stream的中间操作-------------
+		list.add("A");
+		list.add("B");
+		list.add("C");
+		list.stream().map(x -> x.length()).forEach(System.out::println);
+	list.stream().filter(x -> x.equals("B")).map(x -> x.toLowerCase()).forEach(System.out::println);
+		//peek用于debug，是个中间操作
+		list.stream().peek(System.out::println);
+		//limit用于无限流
+		new Random().ints().filter(x -> x < 100).limit(10).forEach(System.out::print);
+		
+		System.out.println();
+		//----------------Stream的终止操作-------------
+		String str = "hello world!";
+		//使用并行流
+		str.chars().parallel().forEach(i -> System.out.print((char)(i)));
+		System.out.println();
+		str.chars().parallel().forEachOrdered(i -> System.out.print((char)(i)));
+		//收集器
+		Stream.of(str.split(" ")).collect(Collectors.toList()).forEach(System.out::println);;
+		Optional<String> op = Stream.of(str.split(" ")).reduce((x,y) -> x +"0"+ y);
+		op.ifPresent(System.out::println);
+		//max || min 
+		op = Stream.of(str.split(" ")).max((x,y) -> x.length() - y.length());
+		System.out.println(op.get());
+		//findFirst
+		op = list.stream().findFirst();
+		System.out.println(op.get());
+		
 	}
 	
 	
