@@ -1,6 +1,5 @@
 package com.expolre.pattern.reactor;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -35,7 +34,7 @@ public class Dispatcher {
 	public void dispatch(){
 		while (true) {
 			System.out.println("Dispatcher--------------------------dispatch()");
-			List<Event> events = selector.select(); //该方法阻塞等待直到有事件到来
+			List<Event> events = selector.select(); //该方法阻塞直到有事件到来
 			System.out.println("The current events size:"+events.size());
 			for (Event event : events) {
 				EventHandler eventHandler = eventHandlerMap.get(event.getEventType());

@@ -9,7 +9,6 @@ public class Event {
 	
 	private InputSource inputSource;
 	private EventType eventType;
-	
 	public InputSource getInputSource() {
 		return inputSource;
 	}

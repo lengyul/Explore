@@ -19,7 +19,6 @@ public class AccpetEventHandler extends EventHandler {
 			readEvent.setEventType(EventType.READ);
 			readEvent.setInputSource(event.getInputSource());
 			System.out.println(Thread.currentThread().getName()+":"+event.getInputSource().toString());
-			// WorkerThreadPool.execute(readEvent);
 		}
 		
 	}
