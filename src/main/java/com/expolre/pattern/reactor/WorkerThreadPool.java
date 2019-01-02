@@ -6,24 +6,30 @@ import java.util.concurrent.TimeUnit;
 
 public class WorkerThreadPool {
 	
-	private static final int availProcessors = Runtime.getRuntime().availableProcessors();
+	private static final int availProcessors = Runtime.getRuntime().availableProcessors() * 2;
 	private static ExecutorService executorService = Executors.newFixedThreadPool(availProcessors);	
-	Thread workerThread = new Thread(new WorkerThread());
 	
 	
-	public void execute(Event event){
-		executorService.execute(workerThread);
+	public static void execute(EventHandler eventHandler,Event event){
+		//executorService.execute(new WorkerThread(eventHandler,event));
+		executorService.execute(new WorkerThread(eventHandler, event));
 	}
 	
-	private class WorkerThread implements Runnable {
+	private static class WorkerThread implements Runnable {
+		EventHandler eventHandler;
+		Event event;
+		public WorkerThread(EventHandler eventHandler,Event event){
+			this.eventHandler = eventHandler;
+			this.event = event;
+		}
 		@Override
 		public void run() {
 			try {
 				TimeUnit.SECONDS.sleep(1);
+				eventHandler.handle(event);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			//System.out.println(Thread.currentThread().getName()+"："+event.getInputSource().toString());
 		}
 	}
 	

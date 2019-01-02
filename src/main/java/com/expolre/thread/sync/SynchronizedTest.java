@@ -14,7 +14,7 @@ public class SynchronizedTest {
 	//对象锁
 	public synchronized void test1(){} //默认为this
 	public void test2(){
-		synchronized (this) { //手动指定锁对象
+		synchronized (this) { //手动指定类对象
 		}
 	}
 	

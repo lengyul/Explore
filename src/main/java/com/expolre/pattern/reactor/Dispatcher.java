@@ -38,7 +38,8 @@ public class Dispatcher {
 			System.out.println("The current events size:"+events.size());
 			for (Event event : events) {
 				EventHandler eventHandler = eventHandlerMap.get(event.getEventType());
-				eventHandler.handle(event);
+				// eventHandler.handle(event);
+				WorkerThreadPool.execute(eventHandler, event);
 			}
 		}
 	}

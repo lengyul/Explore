@@ -1,5 +1,10 @@
 package com.expolre.pattern.reactor;
 
+/**
+ * Reactor模式
+ * @author lengyul
+ * @date 2018年12月29日 下午2:51:53
+ */
 public class Server {
 	
 	
