@@ -2,7 +2,6 @@ package com.expolre.juc;
 
 import java.time.Duration;
 import java.time.Instant;
-import java.time.LocalDateTime;
 import java.util.concurrent.CountDownLatch;
 
 /**
@@ -15,7 +14,7 @@ public class CountDownLatchTest {
 	public static void main(String[] args) throws InterruptedException {
 		
 		CountDownLatch latch =new CountDownLatch(5);
-		LatchDemp ld =new LatchDemp(latch);
+		LatchApp ld = new LatchApp(latch);
 		
 		Instant start = Instant.now();
 		for (int i = 0; i < 5; i++) {
@@ -28,27 +27,29 @@ public class CountDownLatchTest {
 		Duration duration = Duration.between(start, end);
 		System.out.println("任务耗费时间："+duration.getSeconds()+"s"); 
 	}
-}
-
-class LatchDemp implements Runnable{
 	
-	private CountDownLatch latch;
-	
-	public LatchDemp(CountDownLatch latch){
-		this.latch = latch;
-	}
-	
-	@Override
-	public void run() {
-		synchronized (this) {
-		try {			
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}finally{			
-			latch.countDown();// - 1
+	public static class LatchApp implements Runnable{
+		
+		private CountDownLatch latch;
+		
+		public LatchApp(CountDownLatch latch){
+			this.latch = latch;
+		}
+		
+		@Override
+		public void run() {
+			synchronized (this) {
+			try {			
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}finally{			
+				latch.countDown();// - 1
+				}
 			}
 		}
+		
 	}
-	
 }
+
+
