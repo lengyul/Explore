@@ -1,7 +1,6 @@
 package com.expolre.code.java8.functions;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
 import java.util.function.Predicate;
 
