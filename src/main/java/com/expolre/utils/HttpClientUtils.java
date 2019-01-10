@@ -2,10 +2,8 @@ package com.expolre.utils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -14,9 +12,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpEntity;
-import org.apache.http.HttpStatus;
 import org.apache.http.NameValuePair;
 import org.apache.http.ParseException;
 import org.apache.http.client.config.RequestConfig;
@@ -29,6 +25,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
+
 import com.alibaba.fastjson.JSONObject;
 
 /**
@@ -39,7 +36,7 @@ import com.alibaba.fastjson.JSONObject;
 public class HttpClientUtils {
 
 	// 编码格式UTF-8
-	private static final String ENCODING = "UTF-8";
+	private static final String CHARSET_UTF8 = "UTF-8";
 
 	// 设置连接超时时间ms
 	private static final int CONNECT_TIMEOUT = 6000;
@@ -57,7 +54,7 @@ public class HttpClientUtils {
 	 */
 	public static String HttpPost(String url, JSONObject obj) throws Exception {
 		Map<String, Object> params = null;
-		if (obj != null) {
+		if (null != obj) {
 			params = new HashMap<>();
 			for (Object key : obj.keySet()) {
 				params.put(key + "", obj.get(key));
@@ -82,24 +79,23 @@ public class HttpClientUtils {
 		// 创建HttpClient
 		CloseableHttpClient httpClinet = HttpClients.createDefault();
 		CloseableHttpResponse response = null;
+		HttpPost httpPost = new HttpPost(url);
+		httpPost.setConfig(requestConfig);
 
 		try {
-			HttpPost httpPost = new HttpPost(url);
-			httpPost.setConfig(requestConfig);
 			if (null != params) {
 				List<NameValuePair> nvps = new ArrayList<NameValuePair>();
 				for (Object key : params.keySet()) {
 					if (params.get(key) != null)
 						nvps.add(new BasicNameValuePair(key + "", params.get(key).toString()));
 				}
-				UrlEncodedFormEntity entity = new UrlEncodedFormEntity(nvps, ENCODING);
+				UrlEncodedFormEntity entity = new UrlEncodedFormEntity(nvps, CHARSET_UTF8);
 				httpPost.setEntity(entity);
 			}
 			response = httpClinet.execute(httpPost);
-
-			// 判断网络连接状态码是否正常 200
-			if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
-				result = EntityUtils.toString(response.getEntity(), ENCODING);
+			HttpEntity entity = response.getEntity();
+			if (entity != null) {
+				result = EntityUtils.toString(entity, CHARSET_UTF8); //接收响应实体
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -127,11 +123,12 @@ public class HttpClientUtils {
 		try {
 			HttpPost post = new HttpPost(url);
 			post.setHeader("Content-type", "application/json");
-			StringEntity postingString = new StringEntity(json, Charset.forName(ENCODING));// json传递
-			post.setEntity(postingString);
-			response = httpClient.execute(post);
-			if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {				
-				result = EntityUtils.toString(response.getEntity());
+			StringEntity data = new StringEntity(json, CHARSET_UTF8);// json传递
+			post.setEntity(data);
+			response = httpClient.execute(post);		
+			HttpEntity entity = response.getEntity();
+			if (entity != null) {
+				result = EntityUtils.toString(entity, CHARSET_UTF8); //接收响应实体
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -206,8 +203,9 @@ public class HttpClientUtils {
 				}
 			}
 			response = httpClient.execute(httpGet);
-			if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
-				result = EntityUtils.toString(response.getEntity(), ENCODING);
+			HttpEntity entity = response.getEntity();
+			if (entity != null) {
+				result = EntityUtils.toString(entity, CHARSET_UTF8); //接收响应实体
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -245,18 +243,15 @@ public class HttpClientUtils {
 	 * @throws IOException
 	 */
 	public static String getRequestMessage(HttpServletRequest request) throws IOException {
-		request.setCharacterEncoding(ENCODING);// 只针对POST请求方式
+		request.setCharacterEncoding(CHARSET_UTF8);// 只针对POST请求方式
 		StringBuffer resultBuffer = new StringBuffer();
 		try {
-			InputStream input = request.getInputStream();
-			InputStreamReader inputStreamReader = new InputStreamReader(input, ENCODING);
-			BufferedReader reader = new BufferedReader(inputStreamReader);
+			BufferedReader reader = new BufferedReader(new InputStreamReader(request.getInputStream(), CHARSET_UTF8));
 			String tempLine = null;
 			while ((tempLine = reader.readLine()) != null) {
 				resultBuffer.append(tempLine);
 			}
 			reader.close();
-			input.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -270,7 +265,7 @@ public class HttpClientUtils {
 	 * @return
 	 * @throws UnsupportedEncodingException
 	 */
-	public static JSONObject getRepuestParameterToJSON(HttpServletRequest request) throws UnsupportedEncodingException {
+	public static JSONObject getRepuestParamsToJSONObjct(HttpServletRequest request) throws UnsupportedEncodingException {
 		JSONObject jsonObject = null;
 		Map<String, Object> parameterMap = new HashMap<String, Object>();
 		Enumeration<String> keys = request.getParameterNames();

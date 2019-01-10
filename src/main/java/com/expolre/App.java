@@ -1,5 +1,7 @@
 package com.expolre;
 
+import java.time.Instant;
+
 /**
  * Hello world!
  *
@@ -12,6 +14,7 @@ public class App
 	
     public static void main( String[] args )
     {
+    	System.out.println(System.currentTimeMillis());
         System.out.println( "Hello World!" );
     }
 }
