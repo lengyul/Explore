@@ -1,5 +1,8 @@
 package com.expolre.thread.sync;
 
+import java.time.Instant;
+import java.util.concurrent.TimeUnit;
+
 /**
  * Java语言关键字-->synchronized(同步锁)
  * @author lengyul
@@ -12,18 +15,61 @@ package com.expolre.thread.sync;
  */
 public class SynchronizedTest {
 	//对象锁
-	public synchronized void test1(){} //默认为this
+	public synchronized void test1(){
+		try {
+			TimeUnit.SECONDS.sleep(3);
+			System.out.println(Instant.now());
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+	//默认为this
 	public void test2(){
 		synchronized (this) { //手动指定类对象
 		}
 	}
 	
 	//类锁
-	public static synchronized void test3(){}
+	public static synchronized void test3(){
+		try {
+			TimeUnit.SECONDS.sleep(6);
+			System.out.println(Instant.now());
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
 	public void test4(){
 		synchronized (SynchronizedTest.class) {
 		}
 	}
 	
-
+	public static void test5(){
+		System.out.println("test 5");
+	}
+	
+	public static void main(String[] args) throws InterruptedException {
+		SynchronizedTest st1 = new SynchronizedTest();
+		SynchronizedTest st2 = new SynchronizedTest();
+		
+		System.out.println(Instant.now());
+		new Thread(() ->{
+			test3(); //sleep 6s
+		}).start();
+		/*
+		new Thread(() ->{			
+			test5();//sleep 3s
+		}).start();*/
+		
+		
+		
+		new Thread(() ->{			
+			st1.test1();//sleep 3s
+		}).start();
+		
+		new Thread(() ->{			
+			st2.test1();//sleep 3s
+		}).start();
+		
+	}
+	
 }
