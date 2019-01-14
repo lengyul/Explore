@@ -9,6 +9,7 @@ import java.nio.channels.AsynchronousSocketChannel;
 import java.time.Instant;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.Test;
 
@@ -20,7 +21,9 @@ import org.junit.Test;
  *
  */
 public class NonBlockingAIO {
-		
+	
+	Object obj  = new Object();
+	
 	@SuppressWarnings("unchecked")
 	@Test
 	public void client() throws IOException, InterruptedException, ExecutionException{
@@ -32,6 +35,9 @@ public class NonBlockingAIO {
 	     * handler - 消耗结果的处理程序 
 	     */
 	    asChannel.connect(new InetSocketAddress("127.0.0.1",8888),null,new ClientConnectionHandler(asChannel));
+	    synchronized (obj) {
+	    	obj.wait();
+		}
 	    
 	   /* ByteBuffer buffer = ByteBuffer.allocate(1024);
 	    Void avoid = asChannel.connect(new InetSocketAddress("127.0.0.1",8888)).get();
@@ -68,6 +74,7 @@ public class NonBlockingAIO {
             	if (result.get() == -1 ) { //返回写入的字节数
 					return;
 				}
+          
             	/*
             	 * 接收客户端响应数据，Callback方式：发送I / O操作请求，指定一个(CompletionHandler handler)
             	 * ，当异步I / O操作完成后，注册的handler的completed方法被调用，如果发送异常则调用failed方法。

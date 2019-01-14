@@ -5,8 +5,7 @@ import java.nio.ByteBuffer;
 import java.nio.channels.AsynchronousSocketChannel;
 import java.nio.channels.CompletionHandler;
 import java.nio.charset.Charset;
-
-import com.expolre.utils.ByteBufferUtils;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 读取客户端数据处理
@@ -32,12 +31,11 @@ public class ServerSocketChannelReadHandler implements CompletionHandler<Integer
 				e.printStackTrace();
 			}
 		}
-		/*try {
-			Thread.sleep(2000);
+		try {
+			 TimeUnit.SECONDS.sleep(2);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}*/
+		}
 		//读取字节数据
 		attachment.flip();
         System.out.println("接收到客户端响应数据： " + Charset.forName("UTF-8").decode(attachment));
@@ -46,11 +44,13 @@ public class ServerSocketChannelReadHandler implements CompletionHandler<Integer
 
 	@Override
 	public void failed(Throwable exc, ByteBuffer attachment) {
-		System.out.println("---------------服务端接收数据异常，关闭当前通道连接----------------");	
+		System.out.println("---------------服务端接收数据异常，关闭当前通道连接----------------");
+		System.out.println(exc.getMessage());
 		try {
 			this.asChannel.close();
 		} catch (Exception e) {
 			e.printStackTrace();
+			System.out.println(e);
 		}
 	}
 
