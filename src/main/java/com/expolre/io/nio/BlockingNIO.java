@@ -26,7 +26,7 @@ public class BlockingNIO {
 			buffer.clear();//清除缓冲区
 		}
 
-		socketChannel.shutdownOutput();//关闭输出流
+	//	socketChannel.shutdownOutput();//关闭输出流
 		
 		//接收服务端数据
 		int len = 0;

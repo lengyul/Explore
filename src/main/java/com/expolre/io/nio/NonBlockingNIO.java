@@ -16,7 +16,7 @@ import org.junit.Test;
  * 2.缓冲区Buffer
  * 3.选择器Selector：是selectableChannel的多路复用器
  * @author lengyul
- * 阻塞模式
+ * 
  */
 public class NonBlockingNIO {
 

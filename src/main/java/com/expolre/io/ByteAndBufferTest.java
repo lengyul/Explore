@@ -47,20 +47,20 @@ public class ByteAndBufferTest {
 	@Test
 	public void bufferTest(){		
 		ByteBuffer buffer = ByteBuffer.allocate(1024);
-		//capacity = 1024;limit = 1024;postion = 0;
+		//capacity = 1024;limit = 1024;position = 0;
 		
 		buffer.put("abc".getBytes());
-		//capacity = 1024;limit = 1024;postion = 3;
+		//capacity = 1024;limit = 1024;position = 3;
 		
 		buffer.flip();
-		//capacity = 1024;limit = 3;postion = 0;
+		//capacity = 1024;limit = 3;position = 0;
 		
-		byte[] bytes = new byte[buffer.remaining()]; // limit - postion = 3 - 0 = 3
+		byte[] bytes = new byte[buffer.remaining()]; // limit - position = 3 - 0 = 3
 		buffer.get(bytes);
-		//capacity = 1024;limit = 3;postion = 3;
+		//capacity = 1024;limit = 3;position = 3;
 		
 		buffer.clear();
-		//capacity = 1024;limit = 1024;postion = 0;
+		//capacity = 1024;limit = 1024;position = 0;
 		
 		System.out.println(buffer.capacity());
 		System.out.println(buffer.limit());

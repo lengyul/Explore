@@ -9,6 +9,13 @@ import java.net.UnknownHostException;
 
 import org.junit.Test;
 
+/**
+ * 同步阻塞式
+ * 1.ServerSocket Socket
+ * 2.InputStream OutputStream
+ * @author lengyul
+ * 
+ */
 public class BlockingBIO {
 	
 	@Test
