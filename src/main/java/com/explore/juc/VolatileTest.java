@@ -14,6 +14,11 @@ public class VolatileTest {
 		new Thread(td).start();
 		
 		while (true) {
+			
+			/*synchronized (anything) {
+				//一个线程修改的数据对于其他线程是可见的
+			}*/
+			
 			if (td.isFlag()) {				
 				System.out.println(Thread.currentThread().getName()+":"+td.isFlag());
 				break;
