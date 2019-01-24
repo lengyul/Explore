@@ -24,9 +24,9 @@ public class LockObject {
 		synchronized (object) {
 			while (!signallde) {
 				try {
-					System.out.println("-------------------0" + signallde);
+				//	System.out.println("-------------------0" + signallde);
 					object.wait();
-					System.out.println("-------------------1" + signallde);
+				//	System.out.println("-------------------1" + signallde);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -40,6 +40,7 @@ public class LockObject {
 			signallde = true;
 			object.notify();
 		}
+		// signallde = true; // 如果在notify之后修改，可能导致doWait再次进入等待状态
 	}
 
 	public void doNotifyAll() {

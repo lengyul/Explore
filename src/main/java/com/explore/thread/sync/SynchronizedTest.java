@@ -8,7 +8,8 @@ import java.util.concurrent.TimeUnit;
  * @author lengyul
  * @date 2018年12月20日 下午3:31:18
  * 保证原子性(monitorenter / monitorexit)和可见性(释放锁之前更新主内存，获取锁时重新去读取主存数据)
- * 意味着同一时刻保证只有一个线程去执行被synchronized锁定的代码。
+ * 互斥：意味着同一时刻保证只有一个线程去执行被synchronized锁定的代码。
+ * 可见性：确保了一个线程更改的数据对于其他线程是可见的。
  * 两种用法：
  * 	1.对象锁：方法（锁对象默认为this）和同步代码块
  *  2.类锁：静态方法和锁Class对象

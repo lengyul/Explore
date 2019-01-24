@@ -4,6 +4,12 @@ import java.util.Hashtable;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ * 多线程通信（根据指定key来等待或唤醒）
+ * 可能会存在一些问题
+ * @author lengyul
+ * @date 2019年1月24日 下午2:40:21
+ */
 public final class LockObjects {
 
 	static AtomicInteger waitingSize = new AtomicInteger(0);
@@ -30,7 +36,7 @@ public final class LockObjects {
 			try {
 				waitingSize.getAndIncrement();
 				value.wait(timeout);
-				System.out.println("-------------------end");
+			//	System.out.println("-------------------end");
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
