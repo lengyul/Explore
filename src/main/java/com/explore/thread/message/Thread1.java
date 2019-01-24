@@ -4,9 +4,9 @@ package com.explore.thread.message;
 public class Thread1 implements Runnable{
 	
 	private String data;
-	private WaitNotifyObj object;
+	private LockObject object;
 	
-	public Thread1(String data,WaitNotifyObj object){
+	public Thread1(String data,LockObject object){
 		this.data = data;
 		this.object  = object;
 	}

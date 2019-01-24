@@ -36,7 +36,7 @@ public class RandomUtils {
 	
 	static Random random = new Random();
 	
-	public static String randomNumeric(int count){
+	public static synchronized String randomNumeric(int count){
 		StringBuilder sb = new StringBuilder();
 		while (count > 0) {
 			int number = random.nextInt(10);
