@@ -12,7 +12,7 @@ public class ThreadTest {
 	 * print 100
 	 */
 	@Test
-	public void test() {
+	public void testThreadLocal() {
 
 		ThreadLocalNumber tn = new ThreadLocalNumber();
 
