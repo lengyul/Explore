@@ -6,56 +6,51 @@ import org.junit.Test;
 
 import com.explore.thread.lock.ThreadLock;
 
-
 public class ThreadTest {
-	
-	
-	public static void main(String[] args) {
-		
-		ThreadNumber tn = new ThreadNumber();
-		
-		new Thread(() ->{	
-			//for (int i = 1; i <= 100; i++) {				
-				tn.printA();
-			//}
-		}).start();
-		
-		new Thread(() ->{
-			//for (int i = 1; i <= 100; i++) {	
-				tn.printB();
-			//}
-		}).start();
-		
-		new Thread(() ->{
-			//for (int i = 1; i <= 100; i++) {	
-				tn.printC();
-			//}
-		}).start();
-	}
-	
-	/**
-	 * 线程number--
-	 */
-	@Test
-	public void testNumber(){
-		
-	}
-	
 
 	/**
-	 * 线程锁测试
-	 * @throws InterruptedException 
+	 * print 100
 	 */
 	@Test
-	public void testLock() throws InterruptedException{
+	public void test() {
+
+		ThreadLocalNumber tn = new ThreadLocalNumber();
+
+		new Thread(() -> {
+			// for (int i = 1; i <= 100; i++) {
+			tn.printA();
+			// }
+		}).start();
+
+		new Thread(() -> {
+			// for (int i = 1; i <= 100; i++) {
+			tn.printB();
+			// }
+		}).start();
+
+		new Thread(() -> {
+			// for (int i = 1; i <= 100; i++) {
+			tn.printC();
+			// }
+		}).start();
+	}
+
+	/**
+	 * Lock测试
+	 * 
+	 * @throws InterruptedException
+	 */
+	@Test
+	public void testLock() throws InterruptedException {
 		ThreadLock t = new ThreadLock();
-		
-		/*Thread t1 = new Thread( () -> t.run(Thread.currentThread()));
-		Thread t2 = new Thread( () -> t.run(Thread.currentThread()));
-		t1.start();
-		t2.start();*/
-		
-		Thread t1 =new Thread(new Runnable() {
+
+		/*
+		 * Thread t1 = new Thread( () -> t.run(Thread.currentThread())); Thread
+		 * t2 = new Thread( () -> t.run(Thread.currentThread())); t1.start();
+		 * t2.start();
+		 */
+
+		Thread t1 = new Thread(new Runnable() {
 			@Override
 			public void run() {
 				try {
@@ -66,8 +61,8 @@ public class ThreadTest {
 				}
 			}
 		});
-		
-		Thread t2 =new Thread(new Runnable() {
+
+		Thread t2 = new Thread(new Runnable() {
 			@Override
 			public void run() {
 				try {
@@ -78,11 +73,10 @@ public class ThreadTest {
 				}
 			}
 		});
-		
+
 		t1.start();
 		t2.start();
-		
+
 	}
-	
-	
+
 }

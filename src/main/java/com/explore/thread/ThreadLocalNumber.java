@@ -1,6 +1,6 @@
 package com.explore.thread;
 
-public class ThreadNumber {
+public class ThreadLocalNumber {
 
 	public ThreadLocal<Integer> number = new ThreadLocal<>();
 	private int flag = 1;
