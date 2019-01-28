@@ -43,7 +43,7 @@ public class FunctionsTest {
 		return f.apply(number);
 	}
 	@Test
-	public void functionTest(){
+	public void testFunction(){
 		int result = function(100,(x) -> x + 1);
 		System.out.println(result);
 	}
@@ -55,7 +55,7 @@ public class FunctionsTest {
 		return bif.apply(n1, n2);
 	}
 	@Test
-	public void biFunctionTest(){
+	public void testBiFunction(){
 		int result = biFunction(1,1,(x,y) -> (x + y));
 		System.out.println(result);
 	}
@@ -67,7 +67,7 @@ public class FunctionsTest {
 		conf.accept(str);
 	}
 	@Test
-	public void consumerFunctionTest(){
+	public void testConsumerFunction(){
 		consumerFunction("functional programming",x -> System.out.println(x.toUpperCase()));
 		consumerFunction("函数式编程",x -> System.out.println(x));
 	}
@@ -86,7 +86,7 @@ public class FunctionsTest {
 		return lists;
 	}
 	@Test
-	public void supplierFunctionTest(){
+	public void testSupplierFunction(){
 		int result = supplierFunction(() -> (int)(Math.random() * 10));
 		System.out.println(result);
 		List<Integer> lists = supplierFunction(5, () -> (int)(Math.random() * 10));
@@ -111,7 +111,7 @@ public class FunctionsTest {
 		return lists;
 	}
 	@Test
-	public void predicateFunctionTest(){
+	public void testPredicateFunction(){
 		boolean result = predicateFunction(1,(x) -> (x == 0));
 		System.out.println(result);
 		//2
@@ -126,7 +126,7 @@ public class FunctionsTest {
 		return unaryf.apply(str);
 	}
 	@Test
-	public void unaryOperatorFunctionTest(){
+	public void testUnaryOperatorFunction(){
 		String result = unaryOperatorFunction("abc",(x) -> x.toUpperCase());
 		System.out.println(result);
 	}
@@ -138,7 +138,7 @@ public class FunctionsTest {
 		return binaryf.apply(n1, n2);
 	}
 	@Test
-	public void binaryOperatorFunction(){
+	public void testBinaryOperatorFunction(){
 		int result = binaryOperatorFunction(1, 2,(x,y) -> (x+y));
 		System.out.println(result);
 	}
@@ -150,7 +150,7 @@ public class FunctionsTest {
 		return bipref.test(n1, n2);
 	}
 	@Test
-	public void biPredicateFunction(){
+	public void testBiPredicateFunction(){
 		boolean result = biPredicateFunction(1, 2,(x,y) -> (x == y));
 		System.out.println(result);
 	}
