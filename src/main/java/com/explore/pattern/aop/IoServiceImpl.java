@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
+import java.util.Objects;
 
 public class IoServiceImpl implements IoSerivce {
 
@@ -14,14 +15,13 @@ public class IoServiceImpl implements IoSerivce {
 	public IoServiceImpl() {}
 	
 	public IoServiceImpl(InputStream in,OutputStream out) {
-		isNotNull(in,out);
 		this.in = in;
 		this.out = out;
 	}
 
 	public IoServiceImpl(Socket socket) {
 		try {
-			isNotNull(socket);
+			Objects.requireNonNull(socket);
 			this.in = socket.getInputStream();
 			this.out = socket.getOutputStream();
 		} catch (IOException e) {
@@ -30,14 +30,19 @@ public class IoServiceImpl implements IoSerivce {
 	}
 
 	@Override
-	public int read() throws IOException {
-
-		return in.read();
+	public void setInputStream(InputStream in) {
+		this.in = in;
 	}
 
 	@Override
-	public void write(byte[] b) {
+	public void setOutputStream(OutputStream out) {
+		this.out = out;
+	}
+	
+	@Override
+	public int read() throws IOException {
 
+		return in.read();
 	}
 
 	@Override
@@ -53,13 +58,21 @@ public class IoServiceImpl implements IoSerivce {
 	}
 
 	@Override
-	public void setInputStream(InputStream in) {
-		this.in = in;
+	public void write(int b) throws IOException {
+		
+		out.write(b);
 	}
 
 	@Override
-	public void setOutputStream(OutputStream out) {
-		this.out = out;
+	public void write(byte[] b) throws IOException {
+		
+		out.write(b);
+	}
+	
+	@Override
+	public void write(byte[] b, int off, int len) throws IOException {
+		
+		out.write(b, off, len);
 	}
 
 }

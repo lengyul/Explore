@@ -34,7 +34,7 @@ public class SerializableTest implements Serializable{
 	 * @throws IOException
 	 */
 	@Test
-	public void test() throws IOException{
+	public void testEn() throws IOException{
 		Person p1 =new Person(20, "lengyul");
 		Person p2 =new Person(15, "lengyul");
 		
@@ -50,7 +50,7 @@ public class SerializableTest implements Serializable{
 	 * @throws ClassNotFoundException
 	 */
 	@Test
-	public void detest() throws IOException, ClassNotFoundException{
+	public void testDe() throws IOException, ClassNotFoundException{
 		InputStream in =new FileInputStream("Person");
 		ObjectInput oi =new ObjectInputStream(in);
 		Object obj = oi.readObject();

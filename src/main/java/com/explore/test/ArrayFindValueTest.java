@@ -30,7 +30,7 @@ public int binarySearchValue(int[] array,int number){
 	}
 	
 	@Test
-	public void binarySearchValueTest(){
+	public void testBinarySearchValue(){
 		int number = 5;
 		int [] array = {1,3,5,7,9,15,20,35};
 		int reuslt = binarySearchValue(array,number);
@@ -161,7 +161,7 @@ public int binarySearchValue(int[] array,int number){
 	}
 	
 	@Test
-	public void findMaxNumberAtTwiceOfOthersTest(){	
+	public void testFindMaxNumberAtTwiceOfOthers(){	
 		int array [] = {1,32,4,66,50,99,18,77,88};
 		int result = findMaxNumberAtTwiceOfOthers(array);
 		System.out.println(result);
@@ -169,7 +169,7 @@ public int binarySearchValue(int[] array,int number){
 	
 	
 	@Test
-	public void plusOneTest(){
+	public void testPlusOne(){
 		int [] array = {9,9,9,8};
 		int [] plusa = plusOne(array);
 		for (int i = 0; i < plusa.length; i++) {

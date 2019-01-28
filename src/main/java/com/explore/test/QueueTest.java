@@ -14,7 +14,7 @@ import org.junit.Test;
 public class QueueTest {
 
 	@Test
-	public void test(){
+	public void testQueue(){
 			
 		Queue<String> queue =new LinkedList<>();
 		

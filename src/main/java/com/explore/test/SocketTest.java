@@ -18,7 +18,7 @@ import org.junit.Test;
 public class SocketTest {
 
 	@Test
-	public void test() throws UnknownHostException, IOException{
+	public void testClient() throws UnknownHostException, IOException{
 		
 		Socket socket =new Socket("127.0.0.1",10000);
 		OutputStream os = socket.getOutputStream();
@@ -39,7 +39,7 @@ public class SocketTest {
 	
 	
 	@Test
-	public void test2() throws IOException{
+	public void testServer() throws IOException{
 		ServerSocket serverSocket =new ServerSocket(10000);
 		Socket socket =null;
 		socket = serverSocket.accept();

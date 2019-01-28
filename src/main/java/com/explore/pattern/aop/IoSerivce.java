@@ -6,6 +6,9 @@ import java.io.OutputStream;
 public interface IoSerivce extends InputService, OutputService {
 
 	default <T> void isNotNull(Object... obj) {
+		if (obj == null) {
+			throw new NullPointerException("param is not null");
+		}
 		if (obj.length > 0) {
 			for (int i = 0; i < obj.length; i++) {
 				if (obj[i] == null) {
@@ -13,10 +16,9 @@ public interface IoSerivce extends InputService, OutputService {
 				}
 			}
 		}
-
 	}
 
 	void setInputStream(InputStream in);
 
-	void setOutputStream(OutputStream in);
+	void setOutputStream(OutputStream out);
 }
