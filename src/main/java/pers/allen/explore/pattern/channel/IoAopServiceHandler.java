@@ -1,4 +1,4 @@
-package pers.allen.explore.pattern.aop;
+package pers.allen.explore.pattern.channel;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;

@@ -1,4 +1,4 @@
-package pers.allen.explore.pattern.aop;
+package pers.allen.explore.pattern.channel;
 
 import java.io.InputStream;
 import java.io.OutputStream;
