@@ -3,7 +3,6 @@ package pers.allen.explore.pattern.channel;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 
 import org.junit.Test;
 
@@ -22,6 +21,5 @@ public class IoServiceTest {
 		IoSerivce ioSerivce = new IoServiceImpl();
 		ioSerivce.setInputStream(new BufferedInputStream(new FileInputStream("qq.jpg")));
 		
-
 	}
 }

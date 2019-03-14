@@ -24,6 +24,9 @@ public class BinarySystemCalcTest {
 		System.out.println(Integer.parseInt("1010",2)); //二进制
 		System.out.println(Integer.parseInt("20",8));//八进制
 		System.out.println(Integer.parseInt("A1",16));//十六进制
+		
+		byte [] b = new byte[10];
+		System.out.println(new String(b, 0, b.length));
 	}
 	
 	/**

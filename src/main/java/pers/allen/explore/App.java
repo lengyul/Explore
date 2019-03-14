@@ -1,7 +1,5 @@
 package pers.allen.explore;
 
-import java.time.Instant;
-
 /**
  * Hello world!
  *
