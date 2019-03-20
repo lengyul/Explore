@@ -1,7 +1,9 @@
 package pers.allen.explore.code.codec.serialize;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import pers.allen.explore.code.codec.UserInfo;
@@ -20,7 +22,7 @@ import pers.allen.explore.code.codec.UserInfo;
  */
 public class UserInfoTest {
 	
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, ClassNotFoundException {
 		UserInfo userInfo = new UserInfo("Allen",10001); //5 + 4 + 4
 		
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -31,6 +33,12 @@ public class UserInfoTest {
 		
 		System.out.println("The jdk serializable length is: "+bos.toByteArray().length);
 		System.out.println("The byte array serializable length is: "+userInfo.codeC().length);
+		
+		ByteArrayInputStream bis = new ByteArrayInputStream(bos.toByteArray());
+		ObjectInputStream ois = new ObjectInputStream(bis);
+		Object object = ois.readObject();
+		System.out.println(object);
+		
 	}
 	
 }

@@ -19,6 +19,7 @@ import pers.allen.explore.code.codec.UserInfo;
  * 	 兼容json的数据格式
  *   比json的序列化更省时间和空间
  *   支持多种语言
+ *   Core library of the MessagePack for Java
  */
 public class MessagePackTest {
 	
