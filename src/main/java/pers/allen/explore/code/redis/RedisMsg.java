@@ -27,6 +27,11 @@ public class RedisMsg {
 		this.cmd = cmd;
 	}
 	
+	public RedisMsg(RedisCmd cmd, String key) {
+		this.cmd = cmd;
+		this.key = key;
+	}
+	
 	public RedisMsg(RedisCmd cmd, Map<String, Object> dataMap) {
 		this.cmd = cmd;
 		this.dataMap = dataMap;

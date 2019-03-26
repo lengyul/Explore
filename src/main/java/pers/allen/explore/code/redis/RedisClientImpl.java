@@ -12,9 +12,8 @@ public class RedisClientImpl implements RedisClient{
 	
 	private static RedisClient redisClient = null;
 	private final String  address = "127.0.0.1"; //redis default address
-	private final int  port = 6379; //redis default  port
+	private final int  port = 6379; //redis default port
 	private SocketChannel socketChannel = null;
-	//private ByteBuffer byteBuffer = ByteBuffer.allocate(1024); 
 	
 	private RedisClientImpl(){
 		init();
@@ -61,7 +60,7 @@ public class RedisClientImpl implements RedisClient{
 	}
 	
 	@Override
-	public synchronized ByteBuffer channelWriteBytes(RedisMsg msg) {
+	public ByteBuffer channelWriteBytes(RedisMsg msg) {
 		try {
 			ByteBuffer byteBuffer = ByteBuffer.allocate(1024);
 			String cmd = processMsgToCmd(msg);

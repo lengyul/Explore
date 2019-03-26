@@ -1,26 +1,29 @@
 package pers.allen.explore.code.redis;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class RedisServiceImpl implements RedisService{
 	
-	RedisService redisService = new RedisServiceUtils();
 	
 	@Override
 	public Object getKey(String key) {
-		
-		return redisService.getKey(key);
+		if (StringUtils.isEmpty(key)) {
+			throw new NullPointerException("key is not null");
+		}
+		return RedisRespResult.get(RedisServiceUtils.buildGetKey(key));
 	}
 
 	@Override
 	public boolean setKey(String key, Object value) {
 		
-		return redisService.setKey(key, value);
+		return RedisRespResult.set(RedisServiceUtils.buildSet(key, value));
 	}
 
 	@Override
 	public boolean setKey(Map<String, Object> dataMap) {
 		
-		return redisService.setKey(dataMap);
+		return RedisRespResult.set(RedisServiceUtils.buildSetMap(dataMap));
 	}
 
 }

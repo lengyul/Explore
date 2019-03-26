@@ -7,7 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 public class RedisRespResult {
 	
 
-	private RedisRespResult(){}
+	private RedisRespResult() {}
 	
 	private static RedisClient redisClient = RedisClientImpl.getInstance();
 	
