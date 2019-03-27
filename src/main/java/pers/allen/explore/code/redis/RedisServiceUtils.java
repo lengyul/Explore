@@ -7,6 +7,11 @@ public class RedisServiceUtils extends RedisServiceImpl{
 	
 	/*RedisMsg smsg = new RedisMsg(RedisCmd.SET);
 	RedisMsg gmsg = new RedisMsg(RedisCmd.GET);*/
+	private static final RedisService redisService = new RedisServiceImpl();
+	public static RedisService getInstance() {
+		
+		return redisService;
+	}
 	
 	public static RedisMsg buildGetKey(String key) {
 		

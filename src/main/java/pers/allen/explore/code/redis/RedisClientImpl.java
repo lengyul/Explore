@@ -3,6 +3,8 @@ package pers.allen.explore.code.redis;
 import java.io.IOException;
 import java.net.ConnectException;
 import java.net.InetSocketAddress;
+import java.net.SocketOption;
+import java.net.SocketOptions;
 import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
 
@@ -42,6 +44,7 @@ public class RedisClientImpl implements RedisClient{
 			socketChannel = SocketChannel.open(new InetSocketAddress(address,port));
 			if (socketChannel.isConnected()) {
 				this.socketChannel = socketChannel;	
+				this.socketChannel.socket().setSoTimeout(2000);
 				System.out.println("connect to "+address+":"+port+" success");
 			}
 		} catch (IOException e) {
@@ -62,8 +65,8 @@ public class RedisClientImpl implements RedisClient{
 	@Override
 	public ByteBuffer channelWriteBytes(RedisMsg msg) {
 		try {
-			ByteBuffer byteBuffer = ByteBuffer.allocate(1024);
 			String cmd = processMsgToCmd(msg);
+			ByteBuffer byteBuffer = ByteBuffer.allocate(cmd.getBytes().length);
 			if (StringUtils.isNotEmpty(cmd)) {	
 				byteBuffer.put(cmd.getBytes());
 				byteBuffer.flip();
