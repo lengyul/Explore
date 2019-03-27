@@ -3,8 +3,6 @@ package pers.allen.explore.code.redis;
 import java.io.IOException;
 import java.net.ConnectException;
 import java.net.InetSocketAddress;
-import java.net.SocketOption;
-import java.net.SocketOptions;
 import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
 
