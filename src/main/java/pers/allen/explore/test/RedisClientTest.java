@@ -26,7 +26,7 @@ public class RedisClientTest {
 			}).start();
 		}*/
 		
-		RedisService rs = new RedisServiceUtils();
+		RedisService rs = RedisServiceUtils.getInstance();
 				
 		System.out.println(rs.setKey("user", new UserInfo("lengyul")));
 		System.out.println(rs.getKey("user"));

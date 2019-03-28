@@ -13,18 +13,18 @@ public class RedisServiceUtils extends RedisServiceImpl{
 		return redisService;
 	}
 	
-	public static RedisMsg buildGetKey(String key) {
+	protected static RedisMsg buildGetKey(String key) {
 		
 		return new RedisMsg(RedisCmd.GET, key);
 	}
 	
-	public static RedisMsg buildSet(String key, Object value) {
+	protected static RedisMsg buildSet(String key, Object value) {
 		Map<String, Object> dataMap = new HashMap<>();
 		dataMap.put(key, value);
 		return buildSetMap(dataMap);
 	}
 	
-	public static RedisMsg buildSetMap(Map<String, Object> dataMap) {
+	protected static RedisMsg buildSetMap(Map<String, Object> dataMap) {
 		
 		return new RedisMsg(RedisCmd.SET, dataMap);
 	}

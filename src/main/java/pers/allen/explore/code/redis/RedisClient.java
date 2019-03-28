@@ -43,11 +43,6 @@ public interface RedisClient {
 		return sb.toString();
 	}
 	
-	/**
-	 * 初始化建立Redis连接
-	 * default localhost 6379
-	 */
-	void init();
 	
 	/**
 	 * 指定连接Redis地址和端口

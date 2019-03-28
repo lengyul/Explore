@@ -15,9 +15,20 @@ public class RedisClientImpl implements RedisClient{
 	private final int  port = 6379; //redis default port
 	private SocketChannel socketChannel = null;
 	
+	
 	private RedisClientImpl(){
 		init();
 	}
+	
+	public void setSocketChannel(SocketChannel socketChannel) {
+		if (socketChannel == null) {
+			throw new NullPointerException("socketChannel");
+		}
+		if (this.socketChannel != null) {
+			 throw new IllegalStateException("socketChannel set already");
+		}
+		this.socketChannel = socketChannel;
+	}	
 	
 	public static RedisClient getInstance(){
 		if (redisClient == null) {
@@ -30,7 +41,6 @@ public class RedisClientImpl implements RedisClient{
 		return redisClient;
 	}
 	
-	@Override
 	public void init(){
 			init(address,port);
 	}
