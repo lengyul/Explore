@@ -19,5 +19,7 @@ public class ProxyFactory implements InvocationHandler{
 		System.out.println("Invoke end...");
 		return result;
 	}
+	
+	
 
 }
