@@ -44,6 +44,7 @@ public class HttpClientUtils {
 	// 请求获取数据的超时时间(即响应时间)ms
 	private static final int SOCKET_TIMEOUT = 6000;
 
+	private HttpClientUtils() {}
 	/**
 	 * 发送POST请求(JSON对象参数)
 	 * 

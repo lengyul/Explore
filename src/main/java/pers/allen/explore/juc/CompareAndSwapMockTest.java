@@ -10,12 +10,12 @@ package pers.allen.explore.juc;
  * CAS： 操作包含三个操作数 —— 内存位置(V)、预期原值(A)和新值(B)。
  * 如果内存位置的值与预期原值相匹配，那么处理器会自动将该位置值更新为新值。否则，处理器不做任何操作。
  * 
- * ABA问题：因为在更改 V 之前，CAS 主要询问“V 的值是否仍为 A”，所以在第一次读取 V 以及对 V 执行 CAS 操作之前，
+ * ABA问题：因为在更改 V 之前，CAS 主要询“V 的值是否仍为 A”，所以在第一次读取 V 以及对 V 执行 CAS 操作之前，
  * 如果将值从 A 改为 B，然后再改回 A，会使基于 CAS 的算法混乱。在这种情况下，CAS 操作会成功，但是在一些情况下，
  * 结果可能不是所预期的
  *
  */
-public class CASTest {
+public class CompareAndSwapMockTest {
 	
 		public static void main(String[] args) throws InterruptedException {
 			
