@@ -1,5 +1,6 @@
 package pers.allen.explore.thread.message;
 import java.time.LocalDateTime;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.Test;
@@ -40,42 +41,23 @@ public class ThreadMessageTest {
 
 	@Test
 	public void testObjects() throws InterruptedException {
-		
-		Object object3 = new Object();
-		
-		for (int i = 0; i < 10; i++) {
-		//	Thread.sleep(200);
+		int count = 100;
+		for (int i = 0; i < count; i++) {
 			new Thread(() -> {			
-				LockObjects.wait("object1"+RandomUtils.randomNumeric(3));
+				LockObjects.wait("object111"+ RandomUtils.randomNumeric(5));
 			}).start();
 		}
-		
-	
-		/*new Thread(() -> {			
-			LockObjects.wait("object1");
-			System.out.println("----object2");
-		}).start();*/
-		
-		/*new Thread(() -> {			
-			LockObjects.wait("object2", object3);
-			System.out.println("object2");
-		}).start();
-		
-		new Thread(() -> {			
-			LockObjects.wait("object3", object3);
-			System.out.println("object3");
-		}).start();*/
-		
-		
 		TimeUnit.SECONDS.sleep(3);
+		System.out.println(LockObjects.getWaitingSize());
 		
-		System.out.println(LockObjects.getWaitingSize());
-		LockObjects.notifyValues();
-		//LockObjects.notify("object2");
-		System.out.println(LockObjects.getWaitingSize());
-		synchronized (this) {
-			this.wait();
+		for (int i = 0; i < 5; i++) {			
+			new Thread(() -> {
+				LockObjects.notifyValues();		
+			//	LockObjects.notify("object111");
+			}).start();
 		}
+		TimeUnit.SECONDS.sleep(2);
+		System.out.println(LockObjects.getWaitingSize());
 	}
 	
 	

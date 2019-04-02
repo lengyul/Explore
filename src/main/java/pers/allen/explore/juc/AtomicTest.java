@@ -4,7 +4,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * 原子性：是指一个操作或多个操作要么全部执行，且执行的过程不会被任何因素打断，要么就都不执行
+ * 原子性：提供了互斥访问，意味着同一时刻保证只有一个线程对共享数据进行读写操作
  * @author lengyul
  * 原子变量：
  * 1.保证内存可见性
