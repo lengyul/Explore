@@ -45,6 +45,7 @@ public class ThreadMessageTest {
 		for (int i = 0; i < count; i++) {
 			new Thread(() -> {			
 				LockObjects.wait("object111"+ RandomUtils.randomNumeric(5));
+				System.out.println("-------------");
 			}).start();
 		}
 		TimeUnit.SECONDS.sleep(3);

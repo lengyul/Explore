@@ -1,22 +1,20 @@
 package pers.allen.explore.thread.message;
 
 import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.Map;
-import java.util.concurrent.Semaphore;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * 多线程通信（根据指定key使线程进入等待或唤醒） 可能会存在一些问题
- * 
+ * 多线程通信（根据指定key使线程进入等待或唤醒） 
+ * 可能会存在一些问题
  * @author lengyul
  * @date 2019年1月24日 下午2:40:21
  * 
  */
 public final class LockObjects {
 
-	private static AtomicInteger waitingNumber = new AtomicInteger(0); // 等待线程数量
-	private static Map<String, Object> locks = new HashMap<>();
+	private static final AtomicInteger WAITING_THREAD_NUMBER = new AtomicInteger(0); // 等待线程数量
+	private static final Map<String, Object> LOCKS = new HashMap<>(); // 存储标识和等待的对象
 
 	private LockObjects() {
 	}
@@ -37,15 +35,20 @@ public final class LockObjects {
 	 * @param timeout
 	 */
 	public static void wait(String key, Object value, long timeout) {
-		synchronized (locks) { // 避免多线程put同一个key时value被覆盖，计数器被多次调用
-			if (locks.containsKey(key) || locks.containsValue(value)) {
-				throw new IllegalStateException("key or value exists already");
+		synchronized (LOCKS) { // 避免多线程put同一个key时value被覆盖，计数器被多次调用
+			if (LOCKS.containsKey(key)) {
+				throw new IllegalStateException("key exists already");
+			} else if(LOCKS.containsValue(value)) {
+				throw new IllegalStateException("value waiting already");
+				/*synchronized (value) { // 如果同一个value多次wait，需要取出value并使用notifyAll()，未实现
+					value.wait();
+				}*/
 			}
-			locks.put(key, value);
+			LOCKS.put(key, value);
 		}
 		synchronized (value) {
 			try {
-				waitingNumber.incrementAndGet();
+				WAITING_THREAD_NUMBER.incrementAndGet();
 				value.wait(timeout);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
@@ -59,7 +62,7 @@ public final class LockObjects {
 	 * @param key
 	 */
 	public static void notify(String key) {
-		if (locks.containsKey(key)) {
+		if (LOCKS.containsKey(key)) {
 			removeAndNotifyObject(key);
 		}
 	}
@@ -68,15 +71,15 @@ public final class LockObjects {
 	 * 唤醒所有正在等待的线程
 	 */
 	public static void notifyValues() {
-		if (locks.size() > 0) {
-			synchronized (locks) {
-				for (Object item : locks.values()) {
+		if (LOCKS.size() > 0) {
+			synchronized (LOCKS) {
+				for (Object item : LOCKS.values()) {
 					synchronized (item) {
-						waitingNumber.decrementAndGet();
+						WAITING_THREAD_NUMBER.decrementAndGet();
 						item.notify();
 					}
 				}
-				locks.clear();
+				LOCKS.clear();
 			}
 		}
 	}
@@ -87,10 +90,10 @@ public final class LockObjects {
 	 * @param key
 	 */
 	private static void removeAndNotifyObject(String key) {
-		Object value = locks.remove(key);
+		Object value = LOCKS.remove(key);
 		if (value != null) {
 			synchronized (value) {
-				waitingNumber.decrementAndGet();
+				WAITING_THREAD_NUMBER.decrementAndGet();
 				value.notify();
 			}
 		}
@@ -102,7 +105,7 @@ public final class LockObjects {
 	 * @return
 	 */
 	public static int getWaitingSize() {
-		return waitingNumber.get();
+		return WAITING_THREAD_NUMBER.get();
 	}
 
 }
