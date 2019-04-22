@@ -37,14 +37,14 @@ public class MessagePackTest {
 		//Deserialize with MessagePacker
 		MessageUnpacker unpacker = MessagePack.newDefaultUnpacker(packer.toByteArray());
 		int id = unpacker.unpackInt();
-		String usernmae = unpacker.unpackString();
+		String username = unpacker.unpackString();
 		int nums = unpacker.unpackArrayHeader();
 		String[] strs = new String[nums];
 		for (int i = 0; i < nums; i++) {
 			strs[i] = unpacker.unpackString(); 
 		}
 		unpacker.close();
-		System.out.println(String.format("id:%d, name:%s, strs:[%s]", id, usernmae, join(strs)));
+		System.out.println(String.format("id:%d, name:%s, strs:[%s]", id, username, join(strs)));
 	}
 	
 	
