@@ -9,51 +9,51 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  *
  */
 public class ReadWriteLockTest {
-	
+
 	public static void main(String[] args) {
-		
-		ReadWriteLockDemo rwld =new ReadWriteLockDemo();
-		
-		new Thread(() ->{
+
+		ReadWriteLockApp rwld = new ReadWriteLockApp();
+
+		new Thread(() -> {
 			rwld.write(5);
 		}).start();
-		
+
 		for (int i = 0; i < 10; i++) {
-			new Thread(() ->{
+			new Thread(() -> {
 				rwld.read();
 			}).start();
 		}
-		
 	}
-	
-}
-class ReadWriteLockDemo{
-	
-	private int number = 0;
-	
-	private ReadWriteLock lock = new ReentrantReadWriteLock();
-	
-	public void read(){
-		lock.readLock().lock(); //上锁
-		try {			
-			System.out.println(Thread.currentThread().getName()+":"+number);
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally{
-			lock.readLock().unlock();
+
+	private static class ReadWriteLockApp {
+
+		private int number = 0;
+
+		private ReadWriteLock lock = new ReentrantReadWriteLock();
+
+		public void read() {
+			lock.readLock().lock(); // 上锁
+			try {
+				System.out.println(Thread.currentThread().getName() + ":" + number);
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				lock.readLock().unlock();
+			}
 		}
-	}
-	
-	public void write(int number){
-		lock.writeLock().lock();
-		try {
-			System.out.println(Thread.currentThread().getName());
-			this.number = number;			
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally{
-			lock.writeLock().unlock();
+
+		public void write(int number) {
+			lock.writeLock().lock();
+			try {
+				System.out.println(Thread.currentThread().getName());
+				this.number = number;
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				lock.writeLock().unlock();
+			}
 		}
+
 	}
-	
+
 }

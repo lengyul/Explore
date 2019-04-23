@@ -14,57 +14,58 @@ import java.util.concurrent.locks.ReentrantLock;
 public class LockTest {
 
 	public static void main(String[] args) {
-		Ticket ticket = new Ticket();
+		TicketApp ticket = new TicketApp();
 
 		new Thread(ticket).start();
 		new Thread(ticket).start();
 		new Thread(ticket).start();
 	}
 
-}
-
-class Ticket implements Runnable {
-	private int tick = 100;
-	
-	private Lock lock = new ReentrantLock();
-	/*
-	 * 使用jdk Lock锁解决(non-Javadoc)
-	 * @see java.lang.Runnable#run()
-	 */
-	@Override
-	public void run() {
-		while (true) {
-			lock.lock();
-			if (tick > 0) {
-				try {
-					Thread.sleep(200);
-					System.out.println(Thread.currentThread().getName() + "完成售票，余票为" + --tick);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}finally{
-					lock.unlock();
-				 	}	
-				}
-			}
-		}
-	/*
-	 * 使用 synchronized 线程通讯解决
-	 */
-	/*@Override
-	public void run() {
-		while (true) {
-			if (tick > 0) {
-				synchronized (this) {
-					notify();
-					System.out.println(Thread.currentThread().getName() + "完成售票，余票为" + --tick);
+	private static class TicketApp implements Runnable {
+		private int tick = 100;
+		
+		private Lock lock = new ReentrantLock();
+		/*
+		 * 使用jdk Lock锁解决(non-Javadoc)
+		 * @see java.lang.Runnable#run()
+		 */
+		@Override
+		public void run() {
+			while (true) {
+				lock.lock();
+				if (tick > 0) {
 					try {
-						wait();
+						Thread.sleep(200);
+						System.out.println(Thread.currentThread().getName() + "完成售票，余票为" + --tick);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
+					}finally{
+						lock.unlock();
+					 	}	
 					}
 				}
 			}
-		}
-	}*/
+		/*
+		 * 使用 synchronized 线程通讯解决
+		 */
+		/*@Override
+		public void run() {
+			while (true) {
+				if (tick > 0) {
+					synchronized (this) {
+						notify();
+						System.out.println(Thread.currentThread().getName() + "完成售票，余票为" + --tick);
+						try {
+							wait();
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+			}
+		}*/
 
+	}
 }
+
+

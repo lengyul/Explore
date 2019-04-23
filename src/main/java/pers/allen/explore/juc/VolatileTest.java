@@ -17,29 +17,27 @@ public class VolatileTest {
 	 * 对volatile变量写操作时，写之后加入一条store屏障指令，本地内存中共享变量值刷新到主内存
 	 */
 	private volatile static boolean flag = false;
-	
+
 	public static void main(String[] args) {
-		
+
 		new Thread(() -> {
 			try {
 				TimeUnit.MILLISECONDS.sleep(200);
 				flag = true;
-			} catch(InterruptedException e) {
+			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}).start();
-		
+
 		while (true) {
-			/*synchronized (anything) {
-				//一个线程修改的数据对于其他线程是可见的
-			}*/
-			if (flag) {		
-				System.out.println(Thread.currentThread().getName()+"："+flag);
+			/*
+			 * synchronized (anything) { //一个线程修改的数据对于其他线程是可见的 }
+			 */
+			if (flag) {
+				System.out.println(Thread.currentThread().getName() + "：" + flag);
 				break;
 			}
 		}
-		
+
 	}
-	
-	
 }

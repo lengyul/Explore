@@ -16,61 +16,45 @@ package pers.allen.explore.juc;
  *
  */
 public class CompareAndSwapMockTest {
-	
-		public static void main(String[] args) throws InterruptedException {
-			
-			
-			SimulatedCAS cas = new SimulatedCAS();
-			
-			int value = cas.compareAndSwap(cas.getValue(),1);
-			System.out.println(value);
-			/*for (int i = 0; i < 10; i++) {
-				new Thread(() ->{
-					System.out.println(cas.increment());
-				}).start();
-			}*/
-			/*for (int i = 0; i < 10; i++) {
-				new Thread(new Runnable() {
-					@Override
-					public void run() {
-						int expectedValue = cas.getValue();
-						boolean flag = cas.compareAndSet(expectedValue,(int)(Math.random() * 9));
-						System.out.println(flag);
-					}
-				}).start();
-			}*/
+
+	public static void main(String[] args) throws InterruptedException {
+		SimulatedCAS cas = new SimulatedCAS();
+
+		int value = cas.compareAndSwap(cas.getValue(), 1);
+		System.out.println(value);
+	}
+
+	private static class SimulatedCAS {
+
+		private volatile int value;
+
+		public synchronized int getValue() {
+			return value;
 		}
-		
+
+		public synchronized int compareAndSwap(int expectedValue, int newValue) {
+			int oldValue = value;
+			if (oldValue == expectedValue) {
+				value = newValue;
+			}
+			return oldValue;
+		}
+
+		public synchronized boolean compareAndSet(int expecteValue, int newValue) {
+
+			return expecteValue == compareAndSwap(expecteValue, newValue);
+		}
+
+		public int increment() {
+			int oldValue = value;
+			while (compareAndSwap(oldValue, oldValue + 1) != oldValue) {
+				oldValue = value;
+			}
+			return oldValue + 1;
+		}
+
+	}
 }
 
-class SimulatedCAS{
-	
-	private volatile int value;
-	
-	public synchronized int getValue() {
-		return value;
-	}
-	
-	public synchronized int compareAndSwap(int expectedValue,int newValue){
-		int oldValue = value;
-		if (oldValue == expectedValue) {
-			value = newValue;
-		}
-		return oldValue;
-	}
-	
-	public synchronized boolean compareAndSet(int expecteValue,int newValue){
 
-		return expecteValue == compareAndSwap(expecteValue, newValue);
-	}
-	
-	public int increment(){
-		int oldValue = value;
-		while (compareAndSwap(oldValue, oldValue + 1) != oldValue) {
-			oldValue = value;
-		}
-		return oldValue + 1;
-	}
-	
-}
 

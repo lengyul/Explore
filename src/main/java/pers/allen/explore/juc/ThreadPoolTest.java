@@ -24,7 +24,7 @@ import java.util.concurrent.TimeUnit;
 public class ThreadPoolTest {
 	
 	public static void main(String[] args) {
-		ThreadPoolDemo tpd = new ThreadPoolDemo();
+		ThreadPoolApp tpd = new ThreadPoolApp();
 		//创建固定大小线程池
 		/*ExecutorService ex = Executors.newFixedThreadPool(5);
 		
@@ -38,16 +38,18 @@ public class ThreadPoolTest {
 		ScheduledExecutorService ses = Executors.newScheduledThreadPool(5);
 		ses.schedule(tpd,3000,TimeUnit.MILLISECONDS);
 		ses.shutdown();
-	
-	}
-}
-class ThreadPoolDemo implements Runnable{
-	
-	private int number  =  0 ;
-	
-	@Override
-	public void run() {
-		System.out.println(Thread.currentThread().getName()+"："+number++);
 	}
 	
+	private static class ThreadPoolApp implements Runnable{
+		
+		private int number  =  0 ;
+		
+		@Override
+		public void run() {
+			System.out.println(Thread.currentThread().getName()+"："+number++);
+		}
+		
+	}
+	
 }
+

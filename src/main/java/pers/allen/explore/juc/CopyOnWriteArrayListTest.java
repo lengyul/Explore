@@ -15,35 +15,36 @@ public class CopyOnWriteArrayListTest {
 		
 	public static void main(String[] args) throws InterruptedException {
 		
-		ListModifyDemo ldd =new ListModifyDemo();
+		ListModifyApp ldd =new ListModifyApp();
 		new Thread(ldd).start();
 		
 		Thread.sleep(500);
 		new Thread(ldd).start();
+	}
+	
+	
+	private static class ListModifyApp implements Runnable {
+
+		 private static List<String> list = new ArrayList<>();
+	     //private static CopyOnWriteArrayList<String> list = new CopyOnWriteArrayList<>();
 		
-	}
-}
-
-class ListModifyDemo implements Runnable{
-
-	 private static List<String> list = new ArrayList<>();
-     //private static CopyOnWriteArrayList<String> list = new CopyOnWriteArrayList<>();
-	
-	static{
-		list.add("A");
-		list.add("B");
-		list.add("C");
-	}
-	
-	@Override
-	public void run() {
-		Iterator<String> it = list.iterator();
-		while (it.hasNext()) {
-			System.out.println(it.next());
-			//list.remove(0);
-			list.add("D");
+		static{
+			list.add("A");
+			list.add("B");
+			list.add("C");
 		}
 		
+		@Override
+		public void run() {
+			Iterator<String> it = list.iterator();
+			while (it.hasNext()) {
+				System.out.println(it.next());
+				//list.remove(0);
+				list.add("D");
+			}
+			
+		}
 	}
 	
 }
+
