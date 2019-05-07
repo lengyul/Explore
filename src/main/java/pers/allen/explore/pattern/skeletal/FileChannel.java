@@ -14,8 +14,9 @@ public class FileChannel extends AbstractChannel implements Channel {
 		if (!file.exists()) {
 			throw new FileNotFoundException(pathname);
 		}
-		out = new FileOutputStream(file);
-		in = new FileInputStream(file);
+		in = new FileInputStream(file); 
+		// 输入流未关闭，输出流操作同一文件，会造成冲突（文件内容会被清空），使用（RandomAccessFile）文件流
+		out = new FileOutputStream(file); 
 	}
 
 	@Override
