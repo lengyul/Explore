@@ -15,7 +15,9 @@ public final class LockObjects {
 
 	private static final AtomicInteger WAITING_THREAD_NUMBER = new AtomicInteger(0); // 等待线程数量
 	private static final Map<String, Object> LOCKS = new HashMap<>(); // 存储标识和等待的对象
-
+	
+	private static final Object mutex = new Object(); // 互斥操作锁
+	
 	private LockObjects() {
 	}
 
@@ -90,11 +92,13 @@ public final class LockObjects {
 	 * @param key
 	 */
 	private static void removeAndNotifyObject(String key) {
-		Object value = LOCKS.remove(key);
-		if (value != null) {
-			synchronized (value) {
-				WAITING_THREAD_NUMBER.decrementAndGet();
-				value.notify();
+		synchronized (mutex) {
+			Object value = LOCKS.remove(key);
+			if (value != null) {
+				synchronized (value) {
+					WAITING_THREAD_NUMBER.decrementAndGet();
+					value.notify();
+				}
 			}
 		}
 	}

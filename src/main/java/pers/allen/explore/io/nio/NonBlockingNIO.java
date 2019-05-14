@@ -23,7 +23,7 @@ public class NonBlockingNIO {
 	@Test
 	public void client() throws IOException{
 		SocketChannel socketChannel =SocketChannel.open(new InetSocketAddress("127.0.0.1",8888));
-		socketChannel.configureBlocking(false);//切换为非阻塞模式
+	//	socketChannel.configureBlocking(false);//切换为非阻塞模式
 		
 		String res = "client--->data:你好！";
 		byte [] bytes = res.getBytes();
