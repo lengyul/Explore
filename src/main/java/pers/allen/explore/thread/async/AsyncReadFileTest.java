@@ -19,12 +19,14 @@ public class AsyncReadFileTest {
 		FutureRead fr = new FutureRead(path,new ReadResultHandler());
 		FutureTask<Integer> ft = new FutureTask<>(fr);
 		new Thread(ft).start();
+		System.out.println(ft.get()); //获取结果(阻塞线程直到操作完成并返回)
 		
+		// 线程池执行
 		/*ExecutorService es = Executors.newFixedThreadPool(5);
-		es.submit(ft);*/
+		Future fu = es.submit(fr);
+		System.out.println(fu.get());
+		*/
 		
-		
-		//System.out.println(ft.get()); //获取结果(阻塞线程直到操作完成并返回)
 		
 		System.out.println("------------继续执行-----------------");
 		CountDownLatch cdt = new CountDownLatch(1);

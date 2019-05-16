@@ -1,4 +1,4 @@
-package pers.allen.explore.thread;
+package pers.allen.explore.thread.local;
 
 import org.junit.Test;
 

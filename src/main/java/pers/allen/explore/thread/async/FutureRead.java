@@ -10,9 +10,9 @@ import java.util.concurrent.Callable;
 public class FutureRead implements Callable<Integer> {
 
 	private String pathname;
-	private CompletionResult cr;
+	private CompletionResult<Integer,ByteBuffer> cr;
 
-	public FutureRead(String pathname, CompletionResult cr) {
+	public FutureRead(String pathname, CompletionResult<Integer,ByteBuffer> cr) {
 		this.pathname = pathname;
 		this.cr = cr;
 	}
@@ -23,7 +23,7 @@ public class FutureRead implements Callable<Integer> {
 		return read(pathname, cr);
 	}
 
-	static int read(String pathname, CompletionResult<Integer, ByteBuffer> cr) {
+	private static int read(String pathname, CompletionResult<Integer, ByteBuffer> cr) throws IOException {
 		FileInputStream fin = null;
 		FileChannel fc = null;
 		try {
@@ -38,18 +38,10 @@ public class FutureRead implements Callable<Integer> {
 			return -1;
 		} finally {
 			if (fc != null) {
-				try {
-					fc.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+				fc.close();
 			}
 			if (fin != null) {
-				try {
-					fin.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+				fin.close();
 			}
 		}
 	}
