@@ -1,5 +1,6 @@
 package pers.allen.explore.io.aio;
 
+import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.AsynchronousSocketChannel;
 import java.nio.channels.CompletionHandler;
@@ -32,10 +33,7 @@ public class ClientConnectionHandler implements CompletionHandler<Void, ByteBuff
 		System.out.println("客户端连接服务端成功！");
 		attachment = ByteBuffer.allocate(1024);
 		try {
-			asChannel.read(attachment).get();
-			attachment.flip();
-			System.out.println("接收到服务端数据：" + new String(attachment.array()));
-			//向当前连接服务端发送数据
+			// 向当前连接服务端发送数据
 			asChannel.write(ByteBuffer.wrap("The client is ready...".getBytes()));
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -54,8 +52,11 @@ public class ClientConnectionHandler implements CompletionHandler<Void, ByteBuff
 	 */
 	@Override
 	public void failed(Throwable exc, ByteBuffer attachment) {
-		// TODO Auto-generated method stub
-
+		try {
+			asChannel.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

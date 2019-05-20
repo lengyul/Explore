@@ -5,7 +5,6 @@ import java.nio.ByteBuffer;
 import java.nio.channels.AsynchronousSocketChannel;
 import java.nio.channels.CompletionHandler;
 import java.nio.charset.Charset;
-import java.util.concurrent.TimeUnit;
 
 /**
  * 读取客户端数据处理
@@ -22,7 +21,6 @@ public class ServerSocketChannelReadHandler implements CompletionHandler<Integer
 	
 	@Override
 	public void completed(Integer result, ByteBuffer attachment) {
-		// System.out.println(result+","+attachment);
 		if (result == -1) { //客户端停止套接字传输
 			try {
 				this.asChannel.close();
@@ -30,11 +28,6 @@ public class ServerSocketChannelReadHandler implements CompletionHandler<Integer
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-		}
-		try {
-			 TimeUnit.SECONDS.sleep(2);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
 		}
 		//读取字节数据
 		attachment.flip();

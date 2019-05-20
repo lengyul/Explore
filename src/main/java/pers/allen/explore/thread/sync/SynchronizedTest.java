@@ -44,6 +44,13 @@ public class SynchronizedTest {
 		}
 	}
 	
+	// 重入锁 
+	public synchronized void reentrantLock() { // count + 1 = 1
+		synchronized (this) { // count + 1 = 2	
+		} // 代码块执行完毕 count - 1 = 1
+		System.out.println("-------");
+	} // 方法执行完毕 count - 1 = 0  释放锁
+	
 	public static void test5(){
 		System.out.println("test 5");
 	}
