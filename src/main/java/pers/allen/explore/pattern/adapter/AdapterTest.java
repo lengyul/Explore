@@ -15,7 +15,7 @@ import org.junit.Test;
  * @author lengyul
  *
  */
-public class AdapterDemo {
+public class AdapterTest {
 
 	@Test
 	public void test() throws IOException{

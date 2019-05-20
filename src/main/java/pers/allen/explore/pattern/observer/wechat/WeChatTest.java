@@ -3,7 +3,7 @@ package pers.allen.explore.pattern.observer.wechat;
 
 import org.junit.Test;
 
-public class WeChatDemo {
+public class WeChatTest {
 	
 	@Test
 	public void test(){

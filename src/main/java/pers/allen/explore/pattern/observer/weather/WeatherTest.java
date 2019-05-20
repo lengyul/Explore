@@ -10,7 +10,7 @@ import org.junit.Test;
  * @author lengyul
  *
  */
-public class WeatherDemo {
+public class WeatherTest {
 
 	@Test
 	public void test() throws InterruptedException {
