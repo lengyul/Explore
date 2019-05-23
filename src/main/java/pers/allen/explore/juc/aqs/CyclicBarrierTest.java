@@ -1,4 +1,4 @@
-package pers.allen.explore.juc;
+package pers.allen.explore.juc.aqs;
 
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;

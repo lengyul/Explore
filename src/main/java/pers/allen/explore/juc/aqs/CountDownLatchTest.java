@@ -1,4 +1,4 @@
-package pers.allen.explore.juc;
+package pers.allen.explore.juc.aqs;
 
 import java.time.Duration;
 import java.time.Instant;
@@ -13,7 +13,7 @@ public class CountDownLatchTest {
 		
 	public static void main(String[] args) throws InterruptedException {
 		
-		CountDownLatch latch =new CountDownLatch(5);
+		CountDownLatch latch = new CountDownLatch(5);
 		LatchApp ld = new LatchApp(latch);
 		
 		Instant start = Instant.now();

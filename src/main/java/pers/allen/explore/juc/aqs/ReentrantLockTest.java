@@ -1,4 +1,4 @@
-package pers.allen.explore.juc;
+package pers.allen.explore.juc.aqs;
 
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
