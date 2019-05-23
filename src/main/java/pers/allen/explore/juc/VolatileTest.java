@@ -3,11 +3,14 @@ package pers.allen.explore.juc;
 import java.util.concurrent.TimeUnit;
 
 /**
- * volatile关键字：多个线程在内存中操作数据时，直接在主存中操作
+ * volatile关键字：一种轻量级锁，用于保证在多线程之间修改共享变量的可见性
  * @author lengyul
- * 1.volitile 不具备 互斥性
- * 2.volitile 不能保证变量的原子性
+ * volitile 不能保证原子性 不具备 （互斥性）
  * 内存可见性问题是多线程操作共享数据时，（彼此不可见）多个线程在内存中操作数据都有独立的缓存（工作内存）
+ * 使用场景（作为状态标记）：
+ *  只有一个线程去更新变量
+ *  变量会被多个线程读取
+ * 	不需要加锁（加锁可以保证可见性）
  */
 public class VolatileTest {
 	

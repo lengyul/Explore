@@ -7,7 +7,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * CopyOnWriteArrayList - 写入并复制
- * 使用：添加操作多，效率低，每次添加时都会复制；并发迭代多可以选择使用。
+ * 使用：添加操作多，效率低，每次添加时都会复制；并发迭代多可以选择使用
  * @author lengyul
  *
  */

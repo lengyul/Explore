@@ -2,16 +2,20 @@ package pers.allen.explore.juc;
 
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+import pers.allen.explore.thread.sync.SynchronizedTest;
 
 /**
- * 用于解决多线程问题的方式： synchronized 1.同步代码块 2.同步方法
- * 
- * 3.同步锁 Lock： 通过lock()方法上锁，必须通过unlock()方法进行释放锁。 更加灵活
- * 
+ * 用于解决多线程并发问题的方式： 
  * @author lengyul
- *
+ * @see SynchronizedTest
+ * @see Lock#ReentrantLock
+ * 
+ * Lock： 通过lock()加锁，必须使用unlock()手动释放锁
+ * 与synchronized相比更加灵活、可中断（等待）锁、公平锁、多条件变量 Condition
+ * 
+ * 笔记：{@link #http://note.youdao.com/noteshare?id=eb20eaef9dd06bea231a64d956ca838e&sub=795DF88616F34E23B409793174E94BDC}
  */
-public class LockTest {
+public class ReentrantLockTest {
 
 	public static void main(String[] args) {
 		TicketApp ticket = new TicketApp();

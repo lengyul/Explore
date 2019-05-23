@@ -6,6 +6,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 /**
  * 原子性：提供了互斥访问，意味着同一时刻保证只有一个线程对共享数据进行读写操作
  * @author lengyul
+ * @see CompareAndSwapMockTest
  * 原子变量：
  * 1.保证内存可见性
  * 2.CAS(Compare-And-Swap)算法保证数据的原子性，具体实现于Unsafe类

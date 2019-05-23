@@ -5,7 +5,7 @@ import java.time.Instant;
 import java.util.concurrent.CountDownLatch;
 
 /**
- * 闭锁：在完成某些线程时，只有其他所有线程完成时，当前线程才继续执行
+ * 闭锁：执行一个或多个线程时，等待另一个（组）线程完成时，再继续执行
  * @author lengyul
  *
  */
