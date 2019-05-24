@@ -32,7 +32,7 @@ public class ReadWriteLockTest {
 		private ReadWriteLock lock = new ReentrantReadWriteLock();
 
 		public void read() {
-			lock.readLock().lock(); // 上锁
+			lock.readLock().lock(); // 共享锁（读锁）写锁未被占用时
 			try {
 				System.out.println(Thread.currentThread().getName() + ":" + number);
 			} catch (Exception e) {
@@ -43,7 +43,7 @@ public class ReadWriteLockTest {
 		}
 
 		public void write(int number) {
-			lock.writeLock().lock();
+			lock.writeLock().lock(); // 独占锁（写锁）读锁未被占用时
 			try {
 				System.out.println(Thread.currentThread().getName());
 				this.number = number;
