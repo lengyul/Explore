@@ -11,6 +11,8 @@ import java.util.concurrent.TimeUnit;
  *  只有一个线程去更新变量
  *  变量会被多个线程读取
  * 	不需要加锁（加锁可以保证可见性）
+ * 
+ * 笔记：{@link #https://blog.csdn.net/qq_34808893/article/details/90546314}
  */
 public class VolatileTest {
 	
@@ -19,28 +21,36 @@ public class VolatileTest {
 	 * 对volatile变量读操作时，读之前加入一条load屏障指令，从主内存中读取共享变量
 	 * 对volatile变量写操作时，写之后加入一条store屏障指令，本地内存中共享变量值刷新到主内存
 	 */
-	private volatile static boolean flag = false;
+	
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
+
+		FlagClass fc = new FlagClass();
 
 		new Thread(() -> {
-			try {
-				TimeUnit.MILLISECONDS.sleep(200);
-				flag = true;
-			} catch (InterruptedException e) {
-				e.printStackTrace();
+			while (!fc.isFlag()) { // 读取flag的值为true时结束循环
+
 			}
+			System.out.println("---->end");
 		}).start();
 
-		while (true) {
-			/*
-			 * synchronized (anything) { //一个线程修改的数据对于其他线程是可见的 }
-			 */
-			if (flag) {
-				System.out.println(Thread.currentThread().getName() + "：" + flag);
-				break;
-			}
+		TimeUnit.MILLISECONDS.sleep(200);
+
+		fc.setFlag(true); // 修改flag的值为true
+	}
+
+	private static class FlagClass {
+
+		private volatile boolean flag = false; // 变量声明为volatile类型
+
+		public  boolean isFlag() {
+			return flag;
 		}
 
+		public  void setFlag(boolean flag) {
+			this.flag = flag;
+		}
 	}
+	
+	
 }
