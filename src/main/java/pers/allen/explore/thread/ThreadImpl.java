@@ -36,7 +36,7 @@ public class ThreadImpl {
 		t3.start();
 	}
 
-	static class RunnableApp implements Runnable {
+	private static class RunnableApp implements Runnable {
 		private int number = 5;
 
 		@Override
@@ -47,7 +47,7 @@ public class ThreadImpl {
 		}
 	}
 
-	static class ThreadApp extends Thread {
+	private static class ThreadApp extends Thread {
 
 		private int number = 5;
 
