@@ -2,6 +2,7 @@ package pers.allen.explore.juc;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -25,22 +26,23 @@ public class ThreadPoolTest {
 	
 	public static void main(String[] args) {
 		ThreadPoolApp tpd = new ThreadPoolApp();
-		//创建固定大小线程池
+		// 创建固定大小线程池
 		/*ExecutorService ex = Executors.newFixedThreadPool(5);
+		// 创建自定义线程池
+		new ThreadPoolExecutor(corePoolSize, maximumPoolSize, keepAliveTime, unit, workQueue)
 		
 		for (int i = 0; i < 10; i++) {			
 			ex.submit(tpd);
 		}
-		ex.shutdown(); //等待所有任务完成后关闭
-*/		//ex.shutdownNow();//直接关闭
-		
-		//线程调度 定时执行
+		ex.shutdown(); // 等待所有任务完成后关闭
+*/		//ex.shutdownNow();// 直接关闭
+		// 线程调度 定时执行
 		ScheduledExecutorService ses = Executors.newScheduledThreadPool(5);
 		ses.schedule(tpd,3000,TimeUnit.MILLISECONDS);
 		ses.shutdown();
 	}
 	
-	private static class ThreadPoolApp implements Runnable{
+	private static class ThreadPoolApp implements Runnable {
 		
 		private int number  =  0 ;
 		
