@@ -44,7 +44,7 @@ public class ThreadPoolTest {
 	
 	private static class ThreadPoolApp implements Runnable {
 		
-		private int number  =  0 ;
+		private int number  =  0;
 		
 		@Override
 		public void run() {
