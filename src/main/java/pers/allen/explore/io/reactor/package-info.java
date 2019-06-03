@@ -14,6 +14,7 @@
  * | read -> decode -> compute -> encode -> send |
  * |___________________handler___________________|
  * 
+ * 文件传输： 磁盘 -> 内核缓冲区 -> 用户缓冲区 -> socket缓冲区 
  */
 /**
  * @author lengyul
