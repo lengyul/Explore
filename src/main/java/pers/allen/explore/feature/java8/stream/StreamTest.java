@@ -15,7 +15,8 @@ import java.util.stream.Stream;
  * Java8 Stream API操作
  * @author lengyul
  * @date 2018年12月11日 下午3:57:01
- * 常见中间操作：
+ * 常见中间操作（将一个 Stream 转换成 另一个 Stream）：
+ * 
  * map：通过一个 Function 把一个元素类型为 T 的流转换成元素类型为 R 的流。
  * flatMap：通过一个 Function 把一个元素类型为 T 的流中的每个元素转换成一个元素类型为 R 的流，再把这些转换之后的流合并。
  * filter：过滤流中的元素，只保留满足由 Predicate 所指定的条件的元素。
@@ -27,7 +28,8 @@ import java.util.stream.Stream;
  * dropWhile：从原始流起始位置开始删除满足指定 Predicate 的元素，直到遇到第一个不满足 Predicate 的元素。
  * takeWhile：从原始流起始位置开始保留满足指定 Predicate 的元素，直到遇到第一个不满足 Predicate 的元素。
  * ---------------------------------------------------------------------------------------------
- * 常见终止操作：
+ * 常见终止操作（在中间操作上产生的 Stream 执行最终的计算，通常用于返回集合、元素、打印所有元素）：
+ * 
  * forEach：对流中的每个元素执行由Consumer给定的实现。
  * reduce：把一个流约简成单个结果。
  * Max 和 min是两种特殊的约简操作，分别求得流中元素的最大值和最小值。
