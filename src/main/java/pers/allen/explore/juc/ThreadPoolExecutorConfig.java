@@ -43,7 +43,7 @@ public class ThreadPoolExecutorConfig {
 		 * 更多的线程并不会带来任何帮助，可能会降低性能，因为多个线程会在CPU和内存等资源上发生竞争
 		 */
 		corePoolSize = Runtime.getRuntime().availableProcessors();
-		maximumPoolSize = 100;
+		maximumPoolSize = corePoolSize;
 		keepAliveTime = 10; unit = TimeUnit.MINUTES;
 		capacity = 100000; workQueue = new ArrayBlockingQueue<>(capacity);
 		threadFactory = new ThreadFactoryImpl();
