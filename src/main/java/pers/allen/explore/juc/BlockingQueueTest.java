@@ -6,19 +6,21 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 /**
- * 阻塞队列：是一个在队列基础上又支持了两个附加操作的队列，阻塞队列常用于生产者和消费者的场景。
- * 支持阻塞的插入方法：队列满时，队列会阻塞插入元素的线程，直到队列的size < capacity
- * 支持阻塞的获取/移除方法：队列的size为0时，获取元素的线程会被阻塞直到队列的size > 0
+ * 阻塞队列：是一个在队列基础上又支持了两个附加操作的队列，阻塞队列常用于生产者和消费者的场景
  * @author lengyul
  * @date 2018年12月12日 上午10:37:23
- * JDK7 提供了7个阻塞队列：
+ * 
+ * 	 阻塞队列提供了可阻塞的 put 和 take 方法，以及支持定时的 offer 和 poll 方法；
+ * 如果队列已经满了，那么 put 方法将阻塞直到有空间可用，如果队列为空，那么 take 方法将会阻塞直到有元素可用
+ * 
+ * 队列分为有界和无界（无界队列永远都不会满，put 方法也永远不会被阻塞），JDK提供了7种阻塞队列：
  * 1.ArrayBlockingQueue  数组结构组成的有界阻塞队列
  * 2.LinkedBlockingQueue 链表结构组成的有界阻塞队列(Integer.MAX_VALUE)
  * 3.PriorityBlockingQueue 支持优先级的无界阻塞队列
  * 4.DelayQueue 支持延时获取元素的无界阻塞队列，即可指定多久才能从队列中获取当前元素
  * 5.SynchronousQueue 不存储元素的阻塞队列，每一个put必须等待一个take操作，否则不能继续添加其他操作
  * 6.LinkedTransferQueue 链表结构组成的无界阻塞队列
- * 7.LinkedBlockingDeque 链表结构组成的双向阻塞队列，优势在于多线程入队时，减少一半的竞争
+ * 7.LinkedBlockingDeque 链表结构组成的双向阻塞队列，实现了在队列头和队列尾的高效插入和移除
  */
 public class BlockingQueueTest {
 	public static void main(String[] args) throws InterruptedException {

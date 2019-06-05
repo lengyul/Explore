@@ -4,7 +4,7 @@ import java.util.Random;
 import java.util.concurrent.Semaphore;
 
 /**
- * 计数信号量：对需要限制未处理的特定资源请求（线程/操作）数量
+ * 计数信号量：用来控制同时访问某个特定资源请求（线程/操作）的数量
  * @author lengyul
  * @date 2019年1月2日 下午4:09:31
  */

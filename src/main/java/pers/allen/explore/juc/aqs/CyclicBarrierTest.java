@@ -5,9 +5,11 @@ import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.TimeUnit;
 
 /**
- * 循环障碍：允许一组线程之间相互等待，达到一个共同点，再继续执行
+ * 栅栏：所有线程必须同时到达栅栏位置（目标），才能继续执行
  * @author lengyul
  * @date 2019年5月23日 下午3:31:17
+ * 
+ * 栅栏类似于闭锁，闭锁是一次性对象，一旦进入终止状态，就不能被重置
  */
 public class CyclicBarrierTest {
 
