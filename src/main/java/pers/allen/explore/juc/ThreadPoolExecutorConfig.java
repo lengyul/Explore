@@ -3,7 +3,7 @@ package pers.allen.explore.juc;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.concurrent.RejectedExecutionHandler;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -53,6 +53,13 @@ public class ThreadPoolExecutorConfig {
 	private static ExecutorService worker_threads = 
 			new ThreadPoolExecutor(corePoolSize, maximumPoolSize, keepAliveTime, unit, workQueue, threadFactory, handler);
 	
+	public static Future<?> submit(Runnable task) {
+		return worker_threads.submit(task);
+	}
+	
+	public static void execute(Runnable r) {
+		worker_threads.execute(r);
+	}
 	
 	private static class ThreadFactoryImpl implements ThreadFactory {
         private final ThreadGroup group;
