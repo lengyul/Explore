@@ -90,44 +90,4 @@ public class NonBlockingNIO {
 		serverSocketChannel.close();
 	}
 	
-	@Test
-	public void server2() throws IOException{
-		ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();	
-		serverSocketChannel.configureBlocking(false);//切换为非阻塞模式
-		serverSocketChannel.bind(new InetSocketAddress(8888));//监听端口8888
-		//获取选择器
-		Selector selector = Selector.open();
-		//将通道注册到选择器，等待连接
-		serverSocketChannel.register(selector,SelectionKey.OP_ACCEPT);
-		//获取选择器中已经准备就绪的事件
-		while (selector.select() > 0) {
-			//获取当前选择器所有注册的监听事件
-			Iterator<SelectionKey> selectionKeys  = selector.selectedKeys().iterator();
-			while (selectionKeys.hasNext()) {
-				//获取事件	
-				SelectionKey sk = selectionKeys.next();
-				if (sk.isAcceptable()) {
-					//获取客户端连接
-					SocketChannel socketChannel = serverSocketChannel.accept();
-					socketChannel.configureBlocking(false); //切换非阻塞模式
-					socketChannel.register(selector,SelectionKey.OP_READ);//注册选择器为读模式
-				}else if(sk.isReadable()){ //(读就绪)有可读数据
-					new Thread(() -> {						
-						//获取当前选择器上读就绪状态的通道						
-						//读取客户端数据，这里省略
-					}).start();	
-				}else if(sk.isWritable()){ //(写就绪)可写数据，一般不需要去注册该(可写)事件，在读取数据后写入即可
-					new Thread(() -> {						
-						//获取当前选择器上写就绪状态的通道
-						//写入数据到客户端，这里省略
-					}).start();	
-				}
-				selectionKeys.remove(); //移除通道中的事件
-			}
-		}
-		//关闭通道
-		serverSocketChannel.close();
-	}
-	
-	
 }
