@@ -21,7 +21,7 @@ public class ThreadPoolExecutorConfig {
 	 */
 	private static final int maximumPoolSize;
 	
-	// 线程空闲时间，单位 TimeUnit 指定
+	// > corePoolSize 线程的空闲时间，单位 TimeUnit 指定
 	private static final long keepAliveTime;
 	
 	private static final TimeUnit unit;
