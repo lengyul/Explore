@@ -15,10 +15,10 @@ public class Stream {
 	 * 
 	 * Stream 中的元素可能来自任何位置，常见的来源包括集合、数组、文件、伪随机数生成器以及其他的 Stream
 	 * @see java.util.stream.Stream[static of(T... values)]
-	 * @see Collection[default stream()] 	集合
-	 * @see Arrays[static stream()] 		数组
-	 * @see JarFile[stream()] 				文件
-	 * @see Random[ints(long streamSize)] 	随机
+	 * @see Collection[default stream()] 			集合
+	 * @see Arrays[static stream(T[] array)] 		数组
+	 * @see JarFile[stream()] 						文件
+	 * @see Random[ints(long streamSize)] 			随机
 	 * 
 	 * 
 	 * Stream 中的数据元素可以是对象引用、或者基本数据类型，它支持三种基本类型：int、long 和 double
