@@ -4,7 +4,7 @@ import org.junit.Test;
 
 /**
  * Stream API 
- * @author allen
+ * @author lengyul
  * @date 2019年6月5日 下午8:32:12
  */
 public class Stream {
