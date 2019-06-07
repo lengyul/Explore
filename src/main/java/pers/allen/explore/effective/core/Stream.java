@@ -37,7 +37,7 @@ public class Stream {
 	 * @see LazyCalculation
 	 * 
 	 * Stream API 是流式（fluent）的：所有包含 pipeline 的调用可以链接成一个表达式
-	 * @see CollectionStream 	list.stream().filter().map();
+	 * @see CollectionStream 	list.stream().filter().map()...
 	 */
 	
 	
@@ -58,16 +58,29 @@ public class Stream {
 	 * 统一转换、过滤元素的序列 [map()、reduce()、filter()...]
 	 * 计算元素、合并元素的顺序 [flatMap()、max()、min()..]
 	 * 对元素进行去重、排序、收集、分组 [distinct()、sorted()、collect()、Collectors.groupingBy()...]
-	 * 
+	 * @see StreamTest
 	 * -----------------------------------------------------------
 	 * 
 	 * 使用 Stream 不能完成的一些工作
 	 * Lambda 中不能修改任何 local 变量
-	 * forEach 中无法获取当前执行的位置（i），不能使用 return、break、continue 或者抛出受检异常
+	 * forEach 中无法获取当前执行的位置（i），不能使用 return ?、break、continue 或者抛出受检异常
+	 * @see forEachTest()
 	 * 
 	 * 对于 Stream forEach 和 迭代，具体选择哪一种方法，并没有硬性、速成的规则，如果不确定，
 	 * 那么就两种都试试，看一看哪种更好用
 	 */
 	
+	@SuppressWarnings("unused")
+	@Test
+	public void forEachTest() {
+		String name = "Allen"; // 如果在 lambda 中引用默认加上 final
+		"Hello world".chars().forEach((x) -> {
+		// Local variable name defined in an enclosing scope must be final or effectively final
+		// name = "Emma"; 
+			System.out.print(x);
+		// cannot be used
+		// break; continue;
+		});
+	}
 	
 }
