@@ -50,6 +50,7 @@ public class Lambda {
 	 * @author lengyul
 	 * @date 2019年6月5日 下午8:06:35
 	 */
+	@SuppressWarnings("unused")
 	private class MethodReference {
 		/*
 		 * Java 提供了生成比 Lambda 更简洁函数对象的方法：方法引用
