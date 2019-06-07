@@ -10,6 +10,8 @@ import java.util.concurrent.TimeUnit;
  * 并行流（使用ForkJoinPool中的commonPool）
  * @author lengyul
  * @date 2019年5月29日 上午11:08:46
+ * 
+ * forEach 操作是终止操作，它是显式迭代，因而不适合并行
  */
 public class ParallelStreamTest {
 
