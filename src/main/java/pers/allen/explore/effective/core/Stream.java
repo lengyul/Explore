@@ -69,10 +69,16 @@ public class Stream {
 	 * forEach 中无法获取当前执行的位置（i），不能使用 return ?、break、continue 或者抛出受检异常
 	 * @see forEachTest()
 	 * 
+	 * 
 	 * 对于 Stream forEach 和 迭代，具体选择哪一种方法，并没有硬性、速成的规则，如果不确定，
 	 * 那么就两种都试试，看一看哪种更好用
 	 */
 	
+	/*
+	 * tips:
+	 * 		终止操作中的 forEach 应该只用于输出 Stream 计算的结果，而不是让它执行计算
+	 * （但有时候，也可以将 forEach 用于其他目的，如：将 Stream 计算的结果添加到外部集合中）
+	 */
 	@SuppressWarnings("unused")
 	@Test
 	public void forEachTest() {
