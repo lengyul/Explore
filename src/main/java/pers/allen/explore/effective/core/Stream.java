@@ -4,7 +4,7 @@ import org.junit.Test;
 
 /**
  * Stream API 
- * @author lengyul
+ * @author allen
  * @date 2019年6月5日 下午8:32:12
  */
 public class Stream {
@@ -73,10 +73,10 @@ public class Stream {
 	@SuppressWarnings("unused")
 	@Test
 	public void forEachTest() {
-		String name = "Allen"; // 如果在 lambda 中引用默认加上 final
+		String name = "Allen"; // 如果在 lambda 中引用变量默认加上 final
 		"Hello world".chars().forEach((x) -> {
 		// Local variable name defined in an enclosing scope must be final or effectively final
-		// name = "Emma"; 
+		// name = "Emma";  // 在 lambda 中只能读取 final 变量，不能进行修改 local 变量
 			System.out.print(x);
 		// cannot be used
 		// break; continue;
