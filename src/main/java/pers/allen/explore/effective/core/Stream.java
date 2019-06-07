@@ -14,8 +14,15 @@ public class Stream {
 	 * Stream（流）代表数据元素有限或无限的顺序，Stream pipeline（流管道）则代表这些元素的一个多级计算
 	 * 
 	 * Stream 中的元素可能来自任何位置，常见的来源包括集合、数组、文件、伪随机数生成器以及其他的 Stream
+	 * @see java.util.stream.Stream[static of(T... values)]
+	 * @see Collection[default stream()] 	集合
+	 * @see Arrays[static stream()] 		数组
+	 * @see JarFile[stream()] 				文件
+	 * @see Random[ints(long streamSize)] 	随机
+	 * 
+	 * 
 	 * Stream 中的数据元素可以是对象引用、或者基本数据类型，它支持三种基本类型：int、long 和 double
-	 *  
+	 * @see IntStream LongStream DoubleStream
 	 */
 	
 	/*
@@ -39,7 +46,7 @@ public class Stream {
 	 */
 	@Test
 	public void test() {
-		// chars() 返回的 Stream 中的元素，并不是 char 值，而是 int 值
+		// chars() 返回的 IntStream 中的元素，并不是 char 值，而是 int 值
 		"Hello world".chars().forEach(System.out::print);
 		 System.out.println();
 		"Hello world".chars().forEach(x -> System.out.print((char) x));
@@ -47,10 +54,10 @@ public class Stream {
 	
 	/*
 	 * 使用 Stream 的一些优势
-	 * 可以使用并行流对元素进行操作
-	 * 统一转换、过滤元素的序列
-	 * 计算元素、合并元素的顺序
-	 * 对元素进行排序、收集、分组
+	 * 可以使用并行流对元素进行操作 [parallelStream() || stream().parallel()]
+	 * 统一转换、过滤元素的序列 [map()、reduce()、filter()...]
+	 * 计算元素、合并元素的顺序 [flatMap()、max()、min()..]
+	 * 对元素进行去重、排序、收集、分组 [distinct()、sorted()、collect()、Collectors.groupingBy()...]
 	 * 
 	 * -----------------------------------------------------------
 	 * 
