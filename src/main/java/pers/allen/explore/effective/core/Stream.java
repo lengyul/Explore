@@ -55,10 +55,13 @@ public class Stream {
 	/*
 	 * 使用 Stream 的一些优势
 	 * 可以使用并行流对元素进行操作 [parallelStream() || stream().parallel()]
+	 * @see ParallelStreamTest
+	 * 
 	 * 统一转换、过滤元素的序列 [map()、reduce()、filter()...]
 	 * 计算元素、合并元素的顺序 [flatMap()、max()、min()..]
 	 * 对元素进行去重、排序、收集、分组 [distinct()、sorted()、collect()、Collectors.groupingBy()...]
 	 * @see StreamTest
+	 * 
 	 * -----------------------------------------------------------
 	 * 
 	 * 使用 Stream 不能完成的一些工作
