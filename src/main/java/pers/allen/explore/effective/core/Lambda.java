@@ -30,8 +30,12 @@ public class Lambda {
 	 * 	在 Java 8 中，出现了 带有单个抽象方法的接口，这些接口现在被称作函数接口（functional interface），
 	 * Java 允许利用 Lambda 表达式（Lambda expression）创建这些接口的实例
 	 * Lambda 类似于匿名类的函数（语法糖），但是比它简洁的多
+	 * 
 	 */
 	public void test2() {
+		/**
+		 * 从匿名类到Lambda 表达式的转换
+		 */
 		list.sort((o1,o2) -> Integer.compare(o1.length(), o2.length()));
 	}
 	
@@ -58,6 +62,9 @@ public class Lambda {
 		 * 
 		 */
 		public void test() {
+			/**
+			 * 从Lambda 表达式到方法引用的转换
+			 */
 			list.sort(Comparator.comparingInt(String::length)); // str.length()
 		}
 		
