@@ -127,6 +127,7 @@ public class ThreadCancelAndInterrupt {
 		 * 关闭流中断阻塞方法（java.net.SocketException）
 		 * @throws IOException
 		 */
+		@SuppressWarnings("unused")
 		public void cancel() throws IOException {
 			in.close();
 			socket.close();
