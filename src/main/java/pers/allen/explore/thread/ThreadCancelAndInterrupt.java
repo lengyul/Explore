@@ -7,6 +7,8 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.Test;
@@ -39,7 +41,14 @@ public class ThreadCancelAndInterrupt {
 		TimeUnit.SECONDS.sleep(3);
 		sti.cancel();*/
 		
-	}
+		// 使用线程池关闭
+		/*ExecutorService es = Executors.newCachedThreadPool();
+		es.execute(new ThreadCancel());
+		es.execute(new ThreadInterrupt());
+		TimeUnit.SECONDS.sleep(3);
+	//	es.shutdown(); // 无法关闭 轮询和阻塞线程
+		es.shutdownNow(); // 无法关闭 ThreadCancel 线程
+*/	}
 	
 	
 	
