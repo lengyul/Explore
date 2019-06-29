@@ -39,7 +39,7 @@ public class LockMutualTest {
 		public void printA(int count){
 			lock.lock();
 			try {
-				if (number != 1) {
+				while (number != 1) {
 					condition1.await();
 				}
 				System.out.println("当前线程：" + Thread.currentThread().getName() + "打印数据：" + count);
@@ -55,7 +55,7 @@ public class LockMutualTest {
 		public void printB(int count){
 			lock.lock();
 			try {
-				if (number != 2) {
+				while (number != 2) {
 					condition2.await();
 				}
 				System.out.println("当前线程：" + Thread.currentThread().getName() + "打印数据：" + count);
@@ -71,7 +71,7 @@ public class LockMutualTest {
 		public void printC(int count){
 			lock.lock();
 			try {
-				if (number != 3) {
+				while (number != 3) {
 					condition3.await();
 				}
 				System.out.println("当前线程：" + Thread.currentThread().getName() + "打印数据：" + count);
