@@ -10,11 +10,11 @@ public class FactorySingleton {
 	
 	private FactorySingleton(){}
 	
-	private static final FactorySingleton instance = new FactorySingleton();
+	private static final FactorySingleton INSTANCE = new FactorySingleton();
 	
 	public  static FactorySingleton getInstance(){
 		
-		return instance;
+		return INSTANCE;
 	}
 	
 	

@@ -1,9 +1,9 @@
 package pers.allen.explore.pattern.singleton;
 
 /**
- * 双检锁/双重校验锁（DCL，即 double-checked locking）
+ * 双重检查模式（double-check idiom）
  * @author lengyul
- * 采用双锁机制，安全且在多线程情况下能保持高性能
+ * @date 2019年6月30日 下午12:15:22
  */
 public class DCLSingleton {
 	
