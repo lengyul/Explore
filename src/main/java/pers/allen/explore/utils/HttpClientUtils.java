@@ -4,12 +4,16 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.security.KeyManagementException;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.net.ssl.SSLContext;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.http.HttpEntity;
@@ -20,10 +24,13 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.conn.ssl.NoopHostnameVerifier;
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.ssl.SSLContexts;
 import org.apache.http.util.EntityUtils;
 
 import com.alibaba.fastjson.JSONObject;
@@ -53,7 +60,7 @@ public class HttpClientUtils {
 	 * @return
 	 * @throws Exception
 	 */
-	public static String HttpPost(String url, JSONObject obj) throws Exception {
+	public static String httpPost(String url, JSONObject obj) throws Exception {
 		Map<String, Object> params = null;
 		if (null != obj) {
 			params = new HashMap<>();
@@ -61,7 +68,7 @@ public class HttpClientUtils {
 				params.put(key + "", obj.get(key));
 			}
 		}
-		return HttpPost(url, params);
+		return httpPost(url, params);
 	}
 
 	/**
@@ -72,7 +79,7 @@ public class HttpClientUtils {
 	 * @return
 	 * @throws IOException
 	 */
-	public static String HttpPost(String url, Map<String, Object> params) {
+	public static String httpPost(String url, Map<String, Object> params) {
 		String result = null;
 		// 设置连接超时时间(ms)
 		RequestConfig requestConfig = RequestConfig.custom().setConnectTimeout(CONNECT_TIMEOUT)
@@ -82,7 +89,6 @@ public class HttpClientUtils {
 		CloseableHttpResponse response = null;
 		HttpPost httpPost = new HttpPost(url);
 		httpPost.setConfig(requestConfig);
-
 		try {
 			if (null != params) {
 				List<NameValuePair> nvps = new ArrayList<NameValuePair>();
@@ -115,7 +121,7 @@ public class HttpClientUtils {
 	 * @throws ParseException
 	 * @throws IOException
 	 */
-	public static String HttpPost(String url, String json) {
+	public static String httpPost(String url, String json) {
 		String result = null;
 
 		CloseableHttpClient httpClient = HttpClients.createDefault();
@@ -147,7 +153,7 @@ public class HttpClientUtils {
 	 * @return
 	 * @throws Exception
 	 */
-	public static String HttpGet(String url, JSONObject obj) throws Exception {
+	public static String httpGet(String url, JSONObject obj) throws Exception {
 		Map<String, Object> params = null;
 		if (obj != null) {
 			params = new HashMap<>();
@@ -155,7 +161,7 @@ public class HttpClientUtils {
 				params.put(key + "", obj.get(key));
 			}
 		}
-		return HttpGet(url, params);
+		return httpGet(url, params);
 	}
 
 	/**
@@ -164,8 +170,8 @@ public class HttpClientUtils {
 	 * @param url
 	 * @return
 	 */
-	public static String HttpGet(String url, Map<String, Object> params) {
-		return HttpGet(url, null, params);
+	public static String httpGet(String url, Map<String, Object> params) {
+		return httpGet(url, null, params);
 	}
 
 	/**
@@ -176,7 +182,7 @@ public class HttpClientUtils {
 	 * @return
 	 * @throws IOException
 	 */
-	public static String HttpGet(String url, Map<String, String> headers, Map<String, Object> params) {
+	public static String httpGet(String url, Map<String, String> headers, Map<String, Object> params) {
 
 		StringBuffer param = new StringBuffer();
 		int i = 0;
@@ -236,6 +242,24 @@ public class HttpClientUtils {
 		}
 	}
 
+	/**
+	 * https 请求 
+	 * @return
+	 * @throws KeyStoreException
+	 * @throws NoSuchAlgorithmException
+	 * @throws KeyManagementException
+	 */
+	private static CloseableHttpClient createHttpsClient() throws KeyStoreException, NoSuchAlgorithmException, KeyManagementException {
+        SSLContext sslcontext = SSLContexts.custom()
+                .loadTrustMaterial(null, (chain, authType) -> true)
+                .build();
+
+        SSLConnectionSocketFactory sslSf = new SSLConnectionSocketFactory(sslcontext, null, null,
+                new NoopHostnameVerifier());
+
+        return HttpClients.custom().setSSLSocketFactory(sslSf).build();
+    }
+	
 	/**
 	 * 接收HTTP请求(Post)读取流数据
 	 * 
