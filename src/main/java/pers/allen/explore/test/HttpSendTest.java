@@ -9,7 +9,7 @@ public class HttpSendTest {
 	@Test
 	public void test() throws Exception{
 		
-		String result = HttpClientUtils.HttpGet("http://www.baidu.com",null);
+		String result = HttpClientUtils.httpGet("http://www.baidu.com",null);
 		System.err.println(result);
 	}
 	
