@@ -10,6 +10,9 @@ public class ReadmeThread {
 	/*
 	 * @see Thread.class
 	 * 
+	 * 	   操作系统调度的最小单元，一个进程可以包含多个线程，作为程序中任务的执行者，有自己的 栈 、寄存器、本地存储等，但是会和
+	 * 进程内其他线程共享文件描述符、虚拟地址空间
+	 * 
 	 * name 线程名称：如果在创建线程时未指定名称，则会为其生成一个新名称（Thread-x）
 	 * priority 线程优先级：具有较高优先级的线程优先于优先级较低的线程执行（最小为1，默认为5，最大为10）
 	 *					 Thread.MIN_PRIORITY Thread.NORM_PRIORITY Thread.MAX_PRIORITY
@@ -28,17 +31,18 @@ public class ReadmeThread {
 	 * stackSize
 	 * nativeParkEventPointer
 	 * tid -> nextThreadID() 线程的唯一标识
-	 * threadStatus 线程状态：（新建状态、就绪状态、运行状态、阻塞状态、死亡状态），由native方法更新该值
+	 * threadStatus 线程状态：（新建状态、运行状态、阻塞状态、等待状态、等待超时状态、终止状态），由native方法更新该值
 	 * parkBlocker
 	 * blocker
 	 */
 	
 	/*
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
+	 * Thread.State
+	 * NEW         Thread t = new Thread(() -> { // doSomething });
+	 * RUNNABLE	   t.start();  
+	 * BLOCKED	   synchronized  |  Blocking I/O ...
+	 * WAITING	   Object.wait() | Thread.join() ...
+	 * TIMED_WAITING Object.wait(long timeout) 超时
+	 * TERMINATED  线程运行结束或异常退出
 	 */
 }
