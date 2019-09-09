@@ -3,6 +3,8 @@ package pers.allen.explore.effective.core;
 import java.util.Comparator;
 import java.util.List;
 
+import org.junit.Test;
+
 
 /**
  * Lambda 优先于匿名类
@@ -37,6 +39,27 @@ public class Lambda {
 		 * 从匿名类到Lambda 表达式的转换
 		 */
 		list.sort((o1,o2) -> Integer.compare(o1.length(), o2.length()));
+	}
+	
+	// 根据以上两种不同方式创建线程
+	@Test
+	public void test3() {
+		/*
+		 * 匿名类 创建 Runnable
+		 */
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				System.out.println("启动线程1");
+			}
+		}).start();
+		
+		/*
+		 * Lambda 创建 Runnable
+		 */
+		new Thread(() -> {
+			System.out.println("启动线程2");
+		}).start();
 	}
 	
 	/*
