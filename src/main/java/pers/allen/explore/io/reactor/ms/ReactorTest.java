@@ -10,13 +10,13 @@ import org.junit.Test;
 
 public class ReactorTest {
 
-	private static final String ip = "127.0.0.1";
-	private static final int port = 8888;
+	private static final String IP = "127.0.0.1";
+	private static final int PORT = 8888;
 	private static final CountDownLatch cdl = new CountDownLatch(1);
 
 	public static void main(String[] args) throws IOException, InterruptedException {
 
-		new Thread(new Reactor(port)).start();
+		new Thread(new Reactor(PORT)).start();
 
 	}
 
@@ -29,7 +29,7 @@ public class ReactorTest {
 	private static void send() {
 		Socket socket = null;
 		try {
-			socket = new Socket(ip, port);
+			socket = new Socket(IP, PORT);
 			OutputStream out = socket.getOutputStream();
 			String data = "the socket number：" + socket.toString();
 			out.write(data.getBytes());
