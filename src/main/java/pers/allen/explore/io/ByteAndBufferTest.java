@@ -18,7 +18,7 @@ public class ByteAndBufferTest {
 		
 		//FileReader fr  = new FileReader(new File("C:\\Users\\Administrator\\Desktop\\工具.txt"));
 		
-		InputStream in = new FileInputStream(new File("C:\\Users\\Administrator\\Desktop\\terminal.log"));
+		InputStream in = new FileInputStream(new File(""));
 		
 		byte [] bytes = new byte[in.available()];
 		int len = in.read(bytes); // read(byte[] b): -1表示没有字节可用，0表示b的长度为0
@@ -35,12 +35,6 @@ public class ByteAndBufferTest {
 		}
 		System.out.println(sum);
 		System.out.println(new String(bytes,Charset.forName("UTF-8")));
-		
-		/*Reader reader = new InputStreamReader(in);
-		char [] c = new char[1024];
-		reader.read(c);
-		reader.close();
-		System.out.println(new String(c));*/
 	}
 	
 	

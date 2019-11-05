@@ -12,7 +12,7 @@ import org.junit.Test;
  * 同步非阻塞
  * @author lengyul
  * @date 2019年1月16日 上午10:07:33
- * 新的输入/输出NIO是JDK1.4引入的。NIO弥补了原来的I/O的不足，它在标准Java代码中提供了高速、面向块的I/O。
+ * 新的输入/输出NIO是JDK1.4引入的 NIO弥补了原来的I/O的不足，它在标准Java代码中提供了高速、面向块的I/O
  * 
  */
 public class ReadmeNIO {
@@ -43,6 +43,19 @@ public class ReadmeNIO {
 		fc.close();
 		fin.close();
 	}
+	
+	
+	/**
+	 * read / write 在阻塞模式和非阻塞模式下的不同行为特性
+	 * 		 
+	 * 		内核缓冲区状态			    阻塞状态		非阻塞状态
+	 *read()接收缓冲区有数据（可读） 	    立即返回		立即返回
+	 * 		接收缓冲区没有数据（不可读） 阻塞等待数据到来    立即返回 int（负数）
+	 * 
+	 * write()发送缓冲区空闲   全部数据都写入发送缓冲区后返回 能写多少就写入多少，立即返回
+	 * 		    发送缓冲区不空闲 等待发送缓冲区空闲		立即返回 int（负数）
+	 * 
+	 */
 	
 	/**
 	 * 缓冲区内部细节：状态变量和访问方法
@@ -123,9 +136,6 @@ public class ReadmeNIO {
 	}
 	
 	
-	public static void main(String[] args) {
-		
-		System.out.println(0x03);
-	}
+	
 	
 }
