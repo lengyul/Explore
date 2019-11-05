@@ -78,6 +78,7 @@ public class CollectionStream {
 	private static Map<Integer, List<Person>> groupByLevel() {
 		return list.stream().collect(
 				Collectors.groupingBy(Person::getLevel));
+		
 	}
 	
 	/**
