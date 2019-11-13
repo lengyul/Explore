@@ -11,9 +11,9 @@ import java.util.Iterator;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-public class RwEventLoop extends Thread {
+public class EventLoop extends Thread {
 
-	private volatile Selector selector; // loop r/w
+	private volatile Selector selector; // loop i/o
 	private volatile SocketChannel socketChannel; // temp socketChannel
 	private final CompletionHandler<ByteBuffer, SocketChannel> ch;// io handler
 
@@ -26,7 +26,7 @@ public class RwEventLoop extends Thread {
 	private final String prefix = this.getClass().getSimpleName(); // 线程名称
 	private final int mark;
 
-	public RwEventLoop(Selector selector, int ser) {
+	public EventLoop(Selector selector, int ser) {
 		this.selector = selector;
 		this.mark = ++ser;
 		this.setName(prefix + "-" + ser);

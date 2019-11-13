@@ -22,7 +22,7 @@ public class ReactorTest {
 
 	@Test
 	public void test() throws UnknownHostException, IOException, InterruptedException {
-		mockSocket(2000);
+		mockSocket(20);
 		cdl.await();
 	}
 
@@ -31,7 +31,7 @@ public class ReactorTest {
 		try {
 			socket = new Socket(IP, PORT);
 			OutputStream out = socket.getOutputStream();
-			String data = "the socket number：" + socket.toString();
+			String data = "the socket:" + socket.toString();
 			out.write(data.getBytes());
 			cdl.await();
 			/*for (int j = 0; j < 5; j++) {

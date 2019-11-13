@@ -10,27 +10,27 @@ public class EventLoopExecutor {
 	
 	private final int worker_count = Runtime.getRuntime().availableProcessors() * 2;
 	private final Selector[] selectors = new Selector[worker_count];
-	private final RwEventLoop[] eventloops = new RwEventLoop[worker_count];
+	private final EventLoop[] eventloops = new EventLoop[worker_count];
 	private volatile int next = 0;
 	
-	private final RegisterQueue RQ = new RegisterQueue();
-	public RegisterQueue getRQ() {
-		return RQ;
+	private final RegisterQueue rQueue = new RegisterQueue();
+	public RegisterQueue getRQueue() {
+		return rQueue;
 	}
 	
 	public EventLoopExecutor() throws IOException {
 		for (int i = 0; i < worker_count; i++) {
 			selectors[i] = Selector.open();
-			eventloops[i] = new RwEventLoop(selectors[i],i);
+			eventloops[i] = new EventLoop(selectors[i],i);
 		}
-		new Thread(RQ).start(); // 启动注册队列线程
+		new Thread(rQueue).start(); // 启动注册队列线程
 	}
 
-	public RwEventLoop next(SocketChannel socketChannel) {
+	public EventLoop next(SocketChannel socketChannel) {
 		if (next == worker_count) {
 			next = 0;
 		}
-		eventloops[0].registerChannel(socketChannel);
+		eventloops[next].registerChannel(socketChannel);
 		return eventloops[next++];
 	}
 	
