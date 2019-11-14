@@ -11,6 +11,10 @@ import java.util.Iterator;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
+/**
+ * event_loop_thread 
+ * 连接套接字的 read/write 事件检测都是在这个线程里完成的
+ */
 public class EventLoop extends Thread {
 
 	private volatile Selector selector; // loop i/o

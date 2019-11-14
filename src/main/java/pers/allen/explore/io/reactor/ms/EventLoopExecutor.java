@@ -6,12 +6,16 @@ import java.nio.channels.SocketChannel;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
+/**
+ * sub-reactor 的线程列表
+ * 每当有新的连接建立时，从 eventloops 中获取一个 event_loop 线程进行注册
+ */
 public class EventLoopExecutor {
 	
 	private final int worker_count = Runtime.getRuntime().availableProcessors() * 2;
 	private final Selector[] selectors = new Selector[worker_count];
-	private final EventLoop[] eventloops = new EventLoop[worker_count];
-	private volatile int next = 0;
+	private final EventLoop[] eventloops = new EventLoop[worker_count]; // sub-reactor threads
+	private volatile int next = 0; // next event_loop_thread
 	
 	private final RegisterQueue rQueue = new RegisterQueue();
 	public RegisterQueue getRQueue() {

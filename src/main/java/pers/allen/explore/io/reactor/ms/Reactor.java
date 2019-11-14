@@ -22,7 +22,7 @@ public class Reactor implements Runnable {
 	 * 单Reactor多线程：可以使用线程池进行改进，将I/O的读写事件直接分发到工作线程池中进行处理
 	 * 
 	 * 主从Reactor多线程：利用多核处理器的优势
-	 * 	主：单线程处理 accept 事件，获取已连接的 socket ，绑定到 （会选取一个从反应堆线程） reactor 线程中
+	 * 	主：单线程处理 accept 事件，获取已连接的 socket ，注册到 （会选取一个从反应堆线程） sub-reactor 线程中
 	 *  从：一组线程处理已连接的 socket 上的 I/O 事件
 	 */
 	@SuppressWarnings("unused")
